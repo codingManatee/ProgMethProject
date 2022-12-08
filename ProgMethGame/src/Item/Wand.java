@@ -1,5 +1,5 @@
 package Item;
 
-public class Wand {
+public class Wand extends Item{
 
 }

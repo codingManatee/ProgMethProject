@@ -1,18 +1,24 @@
 package Unit;
 
 import Base.Blockable;
+import Base.RangeAttack;
 
-public class SpearUnit extends BaseUnit implements Blockable {
-	public SpearUnit(float hp,float power,float def) {
+public class SpearUnit extends BaseUnit implements Blockable,RangeAttack {
+	public SpearUnit(int hp,int power,int def) {
 		super(hp,power,def);
 	}
 	
 	@Override
-	public int attack(BaseUnit baseUnit) {
+	public int attack(EnermyUnit unit) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	@Override
+	public void rangeAttack() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	@Override
 	public void block() {
@@ -25,4 +31,5 @@ public class SpearUnit extends BaseUnit implements Blockable {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 }

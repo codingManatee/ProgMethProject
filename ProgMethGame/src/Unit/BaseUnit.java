@@ -6,10 +6,10 @@ import javafx.scene.input.KeyEvent;
 
 public abstract class BaseUnit {
 	//Fields
-	private float hp;
-	private	float power;
+	private int hp;
+	private	int power;
 	private int stamina;
-	private float def;
+	private int def;
 	private int life;
 	private int exp;
 	private int level;
@@ -17,24 +17,25 @@ public abstract class BaseUnit {
 	private int nextLevelExp;
 	
 	//Constructor
-	public BaseUnit(float hp,float power,float def) {
+	public BaseUnit(int hp,int power,int def) {
 		setHP(hp);
 		setPower(power);
 		setStamina(100);
 		setDef(def);
 		setLevel(1);
 		setNextLevelExp(100);
+		
 	}
 	
 	
 	//Methods
-	public abstract int attack(BaseUnit baseUnit);
+	public abstract int attack(EnermyUnit unit);
 	public void gainExp(int exp) {
 		setExp(getExp()+exp);
 	}
 	public void checkLevelUp() { // Added Level Up in GUI
 		if (getExp() >= nextLevelExp) {
-		
+			//levelUp();
 			setExp(getExp()-nextLevelExp);
 			setNextLevelExp(getNextLevelExp()+10);
 		}
@@ -58,16 +59,16 @@ public abstract class BaseUnit {
 	
 	
 	//Getter and Setter
-	public float getHP() {
+	public int getHP() {
 		return this.hp;
 	}
-	public float getPower() {
+	public int getPower() {
 		return this.power;
 	}
-	public float getDef() {
+	public int getDef() {
 		return this.def;
 	}
-	public float getLife() {
+	public int getLife() {
 		return this.life;
 	}
 	public int getExp() {
@@ -86,13 +87,13 @@ public abstract class BaseUnit {
 		return this.stamina;
 	}
 	
-	public void setHP(float hp) {
+	public void setHP(int hp) {
 		this.hp = hp;
 	}
-	public void setPower(float power) {
+	public void setPower(int power) {
 		this.power = power;
 	}
-	public void setDef(float def) {
+	public void setDef(int def) {
 		this.def = def;
 	}
 	public void setLife(int life) {

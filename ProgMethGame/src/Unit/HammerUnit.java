@@ -4,12 +4,12 @@ import Base.Blockable;
 
 public class HammerUnit extends BaseUnit implements Blockable{
 	
-	public HammerUnit(float hp,float power,float def) {
+	public HammerUnit(int hp,int power,int def) {
 		super(hp, power, def);
 	}
 
 	@Override
-	public int attack(BaseUnit baseUnit) {
+	public int attack(EnermyUnit unit) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

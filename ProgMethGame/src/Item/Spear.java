@@ -1,5 +1,5 @@
 package Item;
 
-public class Spear {
+public class Spear extends Item{
 
 }

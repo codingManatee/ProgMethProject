@@ -1,15 +1,18 @@
 package Unit;
 
 import Base.Blockable;
+import Item.Item;
+import Item.Sword;
+
 public class SwordUnit extends BaseUnit implements Blockable{
+	private Item holding = new Sword();
 	
-	
-	public SwordUnit(float hp,float power,float def) {
+	public SwordUnit(int hp,int power,int def) {
 		super(hp, power, def);
 	}
 
 	@Override
-	public int attack(BaseUnit baseUnit) {
+	public int attack(EnermyUnit unit) {
 		return 0;
 	}
 
