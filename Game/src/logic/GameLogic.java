@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sharedObject.RenderableHolder;
+import tile.TileManager;
 
 public class GameLogic {
 	private List<Entity> gameObjectContainer;
@@ -12,8 +13,7 @@ public class GameLogic {
 	
 	public GameLogic() {
 		this.gameObjectContainer = new ArrayList<Entity>();
-		
-		player = new Player(64,64);
+		player = new Player(500,500);
 		addNewObject(player);
 	}
 	
@@ -24,6 +24,5 @@ public class GameLogic {
 	
 	public void logicUpdate() {
 		player.update();
-		
 	}
 }

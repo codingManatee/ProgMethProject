@@ -15,6 +15,7 @@ public class RenderableHolder {
 	private List<IRenderable> entities;
 	private Comparator<IRenderable> comparator;
 	public static Image player_model;
+	public static Image up,down,left,right,close,grass,water,sand,brick,tree;
 	
 	static {
 		loadResource();
@@ -34,7 +35,16 @@ public class RenderableHolder {
 	}
 
 	public static void loadResource() {
-		player_model = new Image(ClassLoader.getSystemResource("res/pixil-layer-5.png").toString());
+		up = new Image(ClassLoader.getSystemResource("player/up.png").toString());
+		down = new Image(ClassLoader.getSystemResource("player/down.png").toString());
+		left = new Image(ClassLoader.getSystemResource("player/left.png").toString());
+		right = new Image(ClassLoader.getSystemResource("player/right.png").toString());
+		close = new Image(ClassLoader.getSystemResource("player/close.png").toString());
+		grass = new Image(ClassLoader.getSystemResource("tiles/grass.png").toString());
+		water = new Image(ClassLoader.getSystemResource("tiles/water.png").toString());
+		sand = new Image(ClassLoader.getSystemResource("tiles/sand.png").toString());
+		brick = new Image(ClassLoader.getSystemResource("tiles/brick.png").toString());
+		tree = new Image(ClassLoader.getSystemResource("tiles/tree.png").toString());
 	}
 
 	public void add(IRenderable entity) {

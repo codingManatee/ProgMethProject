@@ -4,6 +4,7 @@ import input.InputUtility;
 import logic.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
+import tile.TileManager;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -18,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 public class GamePanel extends Canvas{
+	
 	//SCREEN SETTING
 	final int originalTileSize = 32; //32x32 tile
 	final int scale = 2;
@@ -27,7 +29,10 @@ public class GamePanel extends Canvas{
 	final int maxScreenRow = 9;
 	final int screenWidth = tileSize * maxScreenCol; // 1024 pixels
 	final int screenHeight = tileSize * maxScreenRow; //576 pixels
-
+	
+	//TILE MANAGER
+	TileManager tileM = new TileManager(this);
+	
 	public GamePanel() {
 		this.setHeight(screenHeight);
 		this.setWidth(screenWidth);
@@ -35,6 +40,8 @@ public class GamePanel extends Canvas{
 		addListener();
 		
 	}
+	
+	//INPUT KEY
 	public void addListener() {
 		this.setOnKeyPressed((KeyEvent event) -> {
 			InputUtility.setKeyPressed(event.getCode(), true);
@@ -77,13 +84,29 @@ public class GamePanel extends Canvas{
 		});
 	}
 	
+	//CANVAS PAINTER
 	public void paintComponent() {
 		GraphicsContext gc = this.getGraphicsContext2D();
-		gc.setFill(Color.BLACK);
+		gc.setFill(Color.WHITE);
 		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
+			//System.out.println(entity.getZ());
+			tileM.draw(gc);
 			if (entity.isVisible() && !entity.isDestroyed()) {
 				entity.draw(gc);
 			}
 		}
+
+	}
+	
+	//Getter and Setter
+	public int getTileSize() {
+		return this.tileSize;
+	}
+	
+	public int getMaxScreenCol() {
+		return this.maxScreenCol;
+	}
+	public int getMaxScreenRow() {
+		return this.maxScreenRow;
 	}
 }
