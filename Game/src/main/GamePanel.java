@@ -1,8 +1,10 @@
 package main;
 
 import input.InputUtility;
+import logic.AssetSetter;
 import logic.CollisionChecker;
 import logic.Player;
+import object.SuperObject;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 import tile.TileManager;
@@ -32,11 +34,10 @@ public class GamePanel extends Canvas{
 	final int screenHeight = tileSize * maxScreenRow; //576 pixels
 	
 	// WORLD SETTING
-	public final int maxWorldCol = 15;
-	public final int maxWorldRow = 15;
+	public final int maxWorldCol = 30;
+	public final int maxWorldRow = 30;
 	public final int worldWidth = maxWorldCol * tileSize;
 	public final int worldHeight = maxWorldRow * tileSize; 
-	
 	
 	// TILE MANAGER
 	TileManager tileM = new TileManager(this);
@@ -46,6 +47,10 @@ public class GamePanel extends Canvas{
 	
 	// COLLISION CHECKER
 	CollisionChecker cChecker = new CollisionChecker(this);
+	
+	// OBJECT IN GAME
+	SuperObject obj[] = new SuperObject[10];
+	AssetSetter aSetter = new AssetSetter(this);
 	
 	public GamePanel() {
 		this.setHeight(screenHeight);
@@ -98,12 +103,28 @@ public class GamePanel extends Canvas{
 		});
 	}
 	
+	public void setUpGame() {
+		
+		aSetter.setObject();
+	}
+	
 	// CANVAS PAINTER
 	public void paintComponent() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.WHITE);
+		
+		// TILE
+		tileM.draw(gc);
+		
+		// OBJECT
+		for (int i = 0 ; i < obj.length ; i++) {
+			if (obj[i] != null) {
+				obj[i].draw(gc, this);
+			}
+		}
+		
 		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
-			tileM.draw(gc);
+			// PLAYER
 			if (entity.isVisible() && !entity.isDestroyed()) {
 				entity.draw(gc);
 			}
@@ -142,5 +163,8 @@ public class GamePanel extends Canvas{
 	}
 	public CollisionChecker getCollisionChecker() {
 		return this.cChecker;
+	}
+	public SuperObject[] getSuperObject() {
+		return this.obj;
 	}
 }

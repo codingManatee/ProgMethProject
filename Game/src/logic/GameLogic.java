@@ -14,6 +14,9 @@ public class GameLogic {
 	public GameLogic(GamePanel gp) {
 		this.gp = gp;
 		this.gameObjectContainer = new ArrayList<Entity>();
+		
+		gp.setUpGame();
+		
 		addNewObject(gp.getPlayer());
 	}
 	

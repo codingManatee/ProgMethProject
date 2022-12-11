@@ -34,52 +34,56 @@ public class TileManager implements IRenderable{
 		tile[0].image = RenderableHolder.getInstance().blank;
 		
 		tile[1] = new Tile();
-		tile[1].image = RenderableHolder.getInstance().topLeft;
+		tile[1].image = RenderableHolder.getInstance().xblank;
 		tile[1].collision = true;
 		
 		tile[2] = new Tile();
-		tile[2].image = RenderableHolder.getInstance().topCenter;
+		tile[2].image = RenderableHolder.getInstance().topLeft;
 		tile[2].collision = true;
 		
 		tile[3] = new Tile();
-		tile[3].image = RenderableHolder.getInstance().topRight;
+		tile[3].image = RenderableHolder.getInstance().topCenter;
 		tile[3].collision = true;
 		
 		tile[4] = new Tile();
-		tile[4].image = RenderableHolder.getInstance().centerLeft;
+		tile[4].image = RenderableHolder.getInstance().topRight;
 		tile[4].collision = true;
 		
 		tile[5] = new Tile();
-		tile[5].image = RenderableHolder.getInstance().center;
+		tile[5].image = RenderableHolder.getInstance().centerLeft;
 		tile[5].collision = true;
 		
 		tile[6] = new Tile();
-		tile[6].image = RenderableHolder.getInstance().centerRight;
+		tile[6].image = RenderableHolder.getInstance().center;
 		tile[6].collision = true;
 		
 		tile[7] = new Tile();
-		tile[7].image = RenderableHolder.getInstance().bottomLeft;
+		tile[7].image = RenderableHolder.getInstance().centerRight;
 		tile[7].collision = true;
 		
 		tile[8] = new Tile();
-		tile[8].image = RenderableHolder.getInstance().bottomCenter;
+		tile[8].image = RenderableHolder.getInstance().bottomLeft;
 		tile[8].collision = true;
 		
 		tile[9] = new Tile();
-		tile[9].image = RenderableHolder.getInstance().bottomRight;
+		tile[9].image = RenderableHolder.getInstance().bottomCenter;
 		tile[9].collision = true;
 		
 		tile[10] = new Tile();
-		tile[10].image = RenderableHolder.getInstance().left;
+		tile[10].image = RenderableHolder.getInstance().bottomRight;
 		tile[10].collision = true;
 		
 		tile[11] = new Tile();
-		tile[11].image = RenderableHolder.getInstance().middle;
+		tile[11].image = RenderableHolder.getInstance().left;
 		tile[11].collision = true;
 		
 		tile[12] = new Tile();
-		tile[12].image = RenderableHolder.getInstance().right;
+		tile[12].image = RenderableHolder.getInstance().middle;
 		tile[12].collision = true;
+		
+		tile[13] = new Tile();
+		tile[13].image = RenderableHolder.getInstance().right;
+		tile[13].collision = true;
 		
 	}
 	
@@ -153,7 +157,7 @@ public class TileManager implements IRenderable{
 			System.out.println("Loadmap Error");
 		}
 	}
-
+	
 	@Override
 	public int getZ() {
 		// TODO Auto-generated method stub

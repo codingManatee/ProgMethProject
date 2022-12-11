@@ -27,7 +27,7 @@ public class Main extends Application{
 		gamePanel.requestFocus();
 		
 		stage.show();
-		
+
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
 				gamePanel.paintComponent();

@@ -17,10 +17,14 @@ public class Player extends Entity{
 	
 	private int speed = 4;
 	private String direction;
+	
 	private int spriteCounter = 0;
 	private int spriteNum = 1;
+	
 	public final int screenX;
 	public final int screenY;
+	
+	int curScore;
 	
 	public Player(GamePanel gp) {
 
@@ -30,13 +34,16 @@ public class Player extends Entity{
 		screenX = gp.getScreenWidth()/2 - gp.getTileSize()/2;
 		screenY = gp.getScreenHeight()/2 - gp.getTileSize()/2;
 		
-		solidArea = new Rectangle(8,8,56,56);
+		solidArea = new Rectangle(16,16,32,32);
+		solidAreaDefaultX = (int) solidArea.getX();
+		solidAreaDefaultY = (int) solidArea.getY();
+		 
 	}
 	
 	public void setDefaultValues() {
 		
-		worldX = gp.getTileSize() * 7;
-		worldY = gp.getTileSize() * 7;
+		worldX = gp.getTileSize() * 8;
+		worldY = gp.getTileSize() * 5;
 		
 	}
 	
@@ -52,29 +59,30 @@ public class Player extends Entity{
 			} else if (InputUtility.getKeyPressed(KeyCode.D)) {
 				direction = "right";
 			}
-			
-			if (InputUtility.getKeyPressed(KeyCode.SPACE)) {
-				speed++;
-				System.out.println(speed);
-			}
-			
+	
 			if (InputUtility.isLeftClickTriggered()) {
+				System.out.println(curScore);
 			}
 			
 			// CHECK TILE COLLISION
-			collisionOn = false;
+			collisionOnLeft = false;
+			collisionOnRight = false;
+			collisionOnTop = false;
+			collisionOnBottom = false;
 			gp.getCollisionChecker().checkTile(this);
 			
-			// IF COLLISION IS FALSE, PLAYER CAN MOVE
-			if (collisionOn == false) {
-				switch(direction) {
-				case "up": this.worldY -= speed; break;
-				case "down": this.worldY += speed; break;
-				case "left": this.worldX -= speed; break;
-				case "right": this.worldX += speed; break;
-				}		
-			}
+			// CHECK OBJECT COLLISION
+			int objIndex = gp.getCollisionChecker().checkObject(this, true);
+			pickUpObject(objIndex);
 			
+			// IF COLLISION IS FALSE, PLAYER CAN MOVE
+			switch(direction) {
+				case "up": if (!collisionOnTop) this.worldY -= speed; break;
+				case "down": if (!collisionOnBottom) this.worldY += speed; break;
+				case "left": if (!collisionOnLeft) this.worldX -= speed; break;
+				case "right": if (!collisionOnRight) this.worldX += speed; break;
+			}	
+		
 			spriteCounter++;
 			
 			if (spriteCounter > 12) {
@@ -88,6 +96,18 @@ public class Player extends Entity{
 					spriteNum = 1;
 				}
 				spriteCounter = 0;
+			}
+		}
+	}
+	
+	public void pickUpObject(int i) {
+		if (i != 999) {
+			String objectName = gp.getSuperObject()[i].name;
+			
+			switch(objectName) {
+			case "Bit":
+				curScore++;
+				gp.getSuperObject()[i] = null;
 			}
 		}
 	}
@@ -130,7 +150,6 @@ public class Player extends Entity{
 		}
 		gc.drawImage(image, screenX, screenY);
 	}
-
 	
 	// GETTER AND SETTER
 	public String getDirection() {

@@ -22,7 +22,7 @@ public class RenderableHolder {
 	// TILES TEXTURE
 	public static Image topLeft,topRight,topCenter,centerLeft,centerRight,center,bottomCenter,bottomLeft,bottomRight;
 	public static Image left,middle,right;
-	public static Image blank;
+	public static Image blank,xblank;
 	
 	static {
 		loadResource();
@@ -56,6 +56,7 @@ public class RenderableHolder {
 		
 		// TILES
 		blank = new Image(ClassLoader.getSystemResource("tiles/blank.png").toString());
+		xblank = new Image(ClassLoader.getSystemResource("tiles/blank.png").toString());
 		
 		topLeft = new Image(ClassLoader.getSystemResource("tiles/topLeft.png").toString());
 		topCenter = new Image(ClassLoader.getSystemResource("tiles/topcenter.png").toString());
@@ -82,7 +83,7 @@ public class RenderableHolder {
 
 		}
 	}
-
+	
 	public void update() {
 		for (int i = entities.size() - 1; i >= 0; i--) {
 			if (entities.get(i).isDestroyed())

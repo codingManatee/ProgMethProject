@@ -9,8 +9,10 @@ public abstract class Entity implements IRenderable{
 	protected int z;
 	protected boolean visible,destroyed;
 	public Rectangle solidArea;
-	public boolean collisionOn = false;
+	public int solidAreaDefaultX, solidAreaDefaultY;
+	public boolean collisionOnLeft,collisionOnRight,collisionOnTop,collisionOnBottom;
 	
+
 	
 	protected Entity(){
 		visible = true;
