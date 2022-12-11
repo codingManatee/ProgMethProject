@@ -20,18 +20,28 @@ import javafx.scene.paint.Color;
 
 public class GamePanel extends Canvas{
 	
-	//SCREEN SETTING
-	final int originalTileSize = 32; //32x32 tile
+	// SCREEN SETTING
+	final int originalTileSize = 32; // 32x32 tile
 	final int scale = 2;
 	
-	final int tileSize = originalTileSize * scale; //64x64 tile
+	final int tileSize = originalTileSize * scale; // 64x64 tile
 	final int maxScreenCol = 16;
 	final int maxScreenRow = 9;
 	final int screenWidth = tileSize * maxScreenCol; // 1024 pixels
 	final int screenHeight = tileSize * maxScreenRow; //576 pixels
 	
-	//TILE MANAGER
+	// WORLD SETTING
+	public final int maxWorldCol = 50;
+	public final int maxWorldRow = 50;
+	public final int worldWidth = maxWorldCol * tileSize;
+	public final int worldHeight = maxWorldRow * tileSize; 
+	
+	
+	// TILE MANAGER
 	TileManager tileM = new TileManager(this);
+	
+	// PLAYER
+	public Player player = new Player(this);
 	
 	public GamePanel() {
 		this.setHeight(screenHeight);
@@ -41,7 +51,7 @@ public class GamePanel extends Canvas{
 		
 	}
 	
-	//INPUT KEY
+	// INPUT KEY
 	public void addListener() {
 		this.setOnKeyPressed((KeyEvent event) -> {
 			InputUtility.setKeyPressed(event.getCode(), true);
@@ -84,7 +94,7 @@ public class GamePanel extends Canvas{
 		});
 	}
 	
-	//CANVAS PAINTER
+	// CANVAS PAINTER
 	public void paintComponent() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.WHITE);
@@ -98,7 +108,7 @@ public class GamePanel extends Canvas{
 
 	}
 	
-	//Getter and Setter
+	// Getter and Setter
 	public int getTileSize() {
 		return this.tileSize;
 	}
@@ -108,5 +118,11 @@ public class GamePanel extends Canvas{
 	}
 	public int getMaxScreenRow() {
 		return this.maxScreenRow;
+	}
+	public int getScreenWidth() {
+		return this.screenWidth;
+	}
+	public int getScreenHeight() {
+		return this.screenHeight;
 	}
 }

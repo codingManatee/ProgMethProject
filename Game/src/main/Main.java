@@ -21,8 +21,8 @@ public class Main extends Application{
 		stage.setScene(scene);
 		stage.setTitle("Adventure Time!");
 		
-		GameLogic logic = new GameLogic();
 		GamePanel gamePanel = new GamePanel();
+		GameLogic logic = new GameLogic(gamePanel);
 		root.getChildren().add(gamePanel);
 		gamePanel.requestFocus();
 		

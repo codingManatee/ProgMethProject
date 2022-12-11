@@ -7,40 +7,56 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+import main.GamePanel;
 import sharedObject.RenderableHolder;
 
 public class Player extends CollidableEntity{
+	
+	GamePanel gp;
+	
 	private static final int speed = 3;
 	private String direction;
 	private int spriteCounter = 0;
 	private int spriteNum = 1;
+	public final int screenX;
+	public final int screenY;
 	
 	
-	public Player(double x,double y) {
-		this.x = x;
-		this.y = y;
-		this.radius = 10;
-		this.direction = "right";
+	public Player(GamePanel gp) {
+
+		this.gp = gp;
+		
+		this.direction = "right";		
+		setDefaultValues();
+		screenX = gp.getScreenWidth()/2 - gp.getTileSize()/2;
+		screenY = gp.getScreenHeight()/2 - gp.getTileSize()/2;
+	}
+	
+	public void setDefaultValues() {
+		
+		worldX = gp.getTileSize() * 24;
+		worldY = gp.getTileSize() * 24;
+		
 	}
 	
 	private void right() {
 		direction = "right";
-		this.x += speed;
+		this.worldX += speed;
 	}
 	
 	private void left() {
 		direction = "left";
-		this.x -= speed;
+		this.worldX -= speed;
 	}
 	
 	private void up() {
 		direction = "up";
-		this.y -= speed;
+		this.worldY -= speed;
 	}
 	
 	private void down() {
 		direction = "down";
-		this.y += speed;
+		this.worldY += speed;
 	}
 	
 	
@@ -64,8 +80,6 @@ public class Player extends CollidableEntity{
 			
 			spriteCounter++;
 			
-			System.out.println(spriteCounter);
-			System.out.println(spriteNum);
 			if (spriteCounter > 12) {
 				if (spriteNum == 1) {
 					spriteNum = 2;
@@ -111,7 +125,7 @@ public class Player extends CollidableEntity{
 			}
 			break;
 		}
-		gc.drawImage(image, x, y);
+		gc.drawImage(image, screenX, screenY);
 		//gc.setFill(Color.BLUE);
 		//gc.fillRect(x, y, 64, 64);
 		//gc.translate(x, y);
