@@ -125,4 +125,10 @@ public class GamePanel extends Canvas{
 	public int getScreenHeight() {
 		return this.screenHeight;
 	}
+	public int getMaxWorldCol() {
+		return this.maxWorldCol;
+	}
+	public int getMaxWorldRow() {
+		return this.maxWorldRow ;
+	}
 }

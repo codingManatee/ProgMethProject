@@ -35,15 +35,19 @@ public class TileManager implements IRenderable{
 		
 		tile[1] = new Tile();
 		tile[1].image = RenderableHolder.getInstance().brick;
+		tile[1].collision = true;
 
 		tile[2] = new Tile();
 		tile[2].image = RenderableHolder.getInstance().water;
+		tile[2].collision = true;
 		
 		tile[3] = new Tile();
 		tile[3].image = RenderableHolder.getInstance().sand;
 		
 		tile[4] = new Tile();
 		tile[4].image = RenderableHolder.getInstance().tree;
+		tile[4].collision = true;
+		
 	}
 	
 	public void draw(GraphicsContext gc) {
@@ -52,7 +56,7 @@ public class TileManager implements IRenderable{
 		int worldRow = 0;
 		
 		
-		while (worldCol < gp.getMaxScreenCol() && worldRow < gp.getMaxScreenRow()) {
+		while (worldCol < gp.getMaxWorldCol() && worldRow < gp.getMaxWorldRow()) {
 			
 			int tileNum = mapTileNum[worldCol][worldRow];
 			
@@ -61,14 +65,22 @@ public class TileManager implements IRenderable{
 			int screenX = worldX - gp.player.worldX + gp.player.screenX;
 			int screenY = worldY - gp.player.worldY + gp.player.screenY;
 			
-			gc.drawImage(tile[tileNum].image, screenX, screenY , gp.getTileSize() , gp.getTileSize() );
+			if (worldX + gp.getTileSize() > gp.player.worldX - gp.player.screenX && 
+				worldX - gp.getTileSize() < gp.player.worldX + gp.player.screenX &&
+				worldY + gp.getTileSize() > gp.player.worldY - gp.player.screenY &&
+				worldY - gp.getTileSize() < gp.player.worldY + gp.player.screenY) {
+				
+				gc.drawImage(tile[tileNum].image, screenX, screenY , gp.getTileSize() , gp.getTileSize() );
+				
+			}
+			
 			worldCol++;
 			
-			if (worldCol == gp.getMaxScreenCol()) {
+			if (worldCol == gp.getMaxWorldCol()) {
 				worldCol = 0;
 				worldRow++;
 			}
-			//System.out.println(tileNum);
+			System.out.println(tileNum);
 			
 			
 		}
