@@ -20,6 +20,8 @@ public class Player extends CollidableEntity{
 	private int spriteNum = 1;
 	public final int screenX;
 	public final int screenY;
+	private int x ;
+	private int y ;
 	
 	
 	public Player(GamePanel gp) {
@@ -34,29 +36,33 @@ public class Player extends CollidableEntity{
 	
 	public void setDefaultValues() {
 		
-		worldX = gp.getTileSize() * 24;
-		worldY = gp.getTileSize() * 24;
+		worldX = gp.getTileSize() * 0;
+		worldY = gp.getTileSize() * 0;
 		
 	}
 	
 	private void right() {
 		direction = "right";
 		this.worldX += speed;
+		x += speed;
 	}
 	
 	private void left() {
 		direction = "left";
 		this.worldX -= speed;
+		x -= speed;
 	}
 	
 	private void up() {
 		direction = "up";
 		this.worldY -= speed;
+		y -= speed;
 	}
 	
 	private void down() {
 		direction = "down";
 		this.worldY += speed;
+		y += speed;
 	}
 	
 	
@@ -74,8 +80,6 @@ public class Player extends CollidableEntity{
 			}
 			
 			if (InputUtility.isLeftClickTriggered()) {
-				//this.x = InputUtility.mouseX;
-				//this.y = InputUtility.mouseY;
 			}
 			
 			spriteCounter++;
@@ -89,7 +93,6 @@ public class Player extends CollidableEntity{
 				spriteCounter = 0;
 			}
 		}
-		
 	}
 	
 	@Override
@@ -126,10 +129,6 @@ public class Player extends CollidableEntity{
 			break;
 		}
 		gc.drawImage(image, screenX, screenY);
-		//gc.setFill(Color.BLUE);
-		//gc.fillRect(x, y, 64, 64);
-		//gc.translate(x, y);
-		//gc.translate(-x, -y);
 	}
 
 }
