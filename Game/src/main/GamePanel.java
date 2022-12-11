@@ -32,8 +32,8 @@ public class GamePanel extends Canvas{
 	final int screenHeight = tileSize * maxScreenRow; //576 pixels
 	
 	// WORLD SETTING
-	public final int maxWorldCol = 50;
-	public final int maxWorldRow = 50;
+	public final int maxWorldCol = 15;
+	public final int maxWorldRow = 15;
 	public final int worldWidth = maxWorldCol * tileSize;
 	public final int worldHeight = maxWorldRow * tileSize; 
 	
@@ -42,10 +42,10 @@ public class GamePanel extends Canvas{
 	TileManager tileM = new TileManager(this);
 	
 	// PLAYER
-	public Player player = new Player(this);
+	Player player = new Player(this);
 	
 	// COLLISION CHECKER
-	public CollisionChecker cChecker = new CollisionChecker(this);
+	CollisionChecker cChecker = new CollisionChecker(this);
 	
 	public GamePanel() {
 		this.setHeight(screenHeight);
@@ -103,7 +103,6 @@ public class GamePanel extends Canvas{
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.WHITE);
 		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
-			//System.out.println(entity.getZ());
 			tileM.draw(gc);
 			if (entity.isVisible() && !entity.isDestroyed()) {
 				entity.draw(gc);
@@ -134,5 +133,14 @@ public class GamePanel extends Canvas{
 	}
 	public int getMaxWorldRow() {
 		return this.maxWorldRow ;
+	}
+	public Player getPlayer() {
+		return this.player;
+	}
+	public TileManager getTileManager() {
+		return this.tileM;
+	}
+	public CollisionChecker getCollisionChecker() {
+		return this.cChecker;
 	}
 }

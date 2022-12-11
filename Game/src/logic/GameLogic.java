@@ -14,7 +14,7 @@ public class GameLogic {
 	public GameLogic(GamePanel gp) {
 		this.gp = gp;
 		this.gameObjectContainer = new ArrayList<Entity>();
-		addNewObject(gp.player);
+		addNewObject(gp.getPlayer());
 	}
 	
 	protected void addNewObject(Entity entity) {
@@ -23,6 +23,6 @@ public class GameLogic {
 	}
 	
 	public void logicUpdate() {
-		gp.player.update();
+		gp.getPlayer().update();
 	}
 }

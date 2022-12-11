@@ -14,9 +14,15 @@ public class RenderableHolder {
 
 	private List<IRenderable> entities;
 	private Comparator<IRenderable> comparator;
-	public static Image player_model;
-	public static Image up,down,left1,left2,left3,left4,right,close,grass,water,sand,brick,tree,blank;
+	
+	// PLAYER ANIMATION
+	public static Image up,down,left1,left2,left3,left4;
 	public static Image right1,right2,right3,right4;
+	
+	// TILES TEXTURE
+	public static Image topLeft,topRight,topCenter,centerLeft,centerRight,center,bottomCenter,bottomLeft,bottomRight;
+	public static Image left,middle,right;
+	public static Image blank;
 	
 	static {
 		loadResource();
@@ -36,11 +42,8 @@ public class RenderableHolder {
 	}
 
 	public static void loadResource() {
-//		up = new Image(ClassLoader.getSystemResource("player/up.png").toString());
-//		down = new Image(ClassLoader.getSystemResource("player/down.png").toString());
-//		left = new Image(ClassLoader.getSystemResource("player/left.png").toString());
-//		right = new Image(ClassLoader.getSystemResource("player/right.png").toString());
 		
+		// PLAYER
 		left1 = new Image(ClassLoader.getSystemResource("player/left1.png").toString());
 		left2 = new Image(ClassLoader.getSystemResource("player/left2.png").toString());
 		left3 = new Image(ClassLoader.getSystemResource("player/left3.png").toString());
@@ -51,15 +54,23 @@ public class RenderableHolder {
 		right3 = new Image(ClassLoader.getSystemResource("player/right3.png").toString());
 		right4 = new Image(ClassLoader.getSystemResource("player/right4.png").toString());
 		
-		
+		// TILES
 		blank = new Image(ClassLoader.getSystemResource("tiles/blank.png").toString());
 		
-		close = new Image(ClassLoader.getSystemResource("player/close.png").toString());
-		grass = new Image(ClassLoader.getSystemResource("tiles/grass.png").toString());
-		water = new Image(ClassLoader.getSystemResource("tiles/water.png").toString());
-		sand = new Image(ClassLoader.getSystemResource("tiles/sand.png").toString());
-		brick = new Image(ClassLoader.getSystemResource("tiles/brick.png").toString());
-		tree = new Image(ClassLoader.getSystemResource("tiles/tree.png").toString());
+		topLeft = new Image(ClassLoader.getSystemResource("tiles/topLeft.png").toString());
+		topCenter = new Image(ClassLoader.getSystemResource("tiles/topcenter.png").toString());
+		topRight = new Image(ClassLoader.getSystemResource("tiles/topright.png").toString());
+		centerLeft = new Image(ClassLoader.getSystemResource("tiles/centerleft.png").toString());
+		center = new Image(ClassLoader.getSystemResource("tiles/center.png").toString());
+		centerRight = new Image(ClassLoader.getSystemResource("tiles/centerRight.png").toString());
+		bottomLeft = new Image(ClassLoader.getSystemResource("tiles/bottomleft.png").toString());
+		bottomCenter = new Image(ClassLoader.getSystemResource("tiles/bottomcenter.png").toString());
+		bottomRight = new Image(ClassLoader.getSystemResource("tiles/bottomright.png").toString());
+		
+		left = new Image(ClassLoader.getSystemResource("tiles/left.png").toString());
+		middle = new Image(ClassLoader.getSystemResource("tiles/middle.png").toString());
+		right = new Image(ClassLoader.getSystemResource("tiles/right.png").toString());
+		
 	}
 
 	public void add(IRenderable entity) {

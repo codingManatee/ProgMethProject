@@ -15,15 +15,12 @@ public class Player extends Entity{
 	
 	GamePanel gp;
 	
-	private int speed = 3;
+	private int speed = 4;
 	private String direction;
 	private int spriteCounter = 0;
 	private int spriteNum = 1;
 	public final int screenX;
 	public final int screenY;
-	private int x ;
-	private int y ;
-	
 	
 	public Player(GamePanel gp) {
 
@@ -33,48 +30,27 @@ public class Player extends Entity{
 		screenX = gp.getScreenWidth()/2 - gp.getTileSize()/2;
 		screenY = gp.getScreenHeight()/2 - gp.getTileSize()/2;
 		
-		solidArea = new Rectangle(0,0, gp.getTileSize(), gp.getTileSize());
+		solidArea = new Rectangle(8,8,56,56);
 	}
 	
 	public void setDefaultValues() {
 		
-		worldX = gp.getTileSize() * 0;
-		worldY = gp.getTileSize() * 0;
+		worldX = gp.getTileSize() * 7;
+		worldY = gp.getTileSize() * 7;
 		
 	}
-	
-	private void right() {
-		direction = "right";
-		this.worldX += speed;
-	}
-	
-	private void left() {
-		direction = "left";
-		this.worldX -= speed;
-	}
-	
-	private void up() {
-		//direction = "up";
-		this.worldY -= speed;
-	}
-	
-	private void down() {
-		//direction = "down";
-		this.worldY += speed;
-	}
-	
 	
 	public void update() {
 		if (InputUtility.getKeyPressed(KeyCode.W)||InputUtility.getKeyPressed(KeyCode.S)
 				||InputUtility.getKeyPressed(KeyCode.A)||InputUtility.getKeyPressed(KeyCode.D)) {
 			if (InputUtility.getKeyPressed(KeyCode.W)) {
-				up();
+				direction = "up";
 			} else if (InputUtility.getKeyPressed(KeyCode.S)){
-				down();
+				direction = "down";
 			} else if (InputUtility.getKeyPressed(KeyCode.A)) {
-				left();
+				direction = "left";
 			} else if (InputUtility.getKeyPressed(KeyCode.D)) {
-				right();
+				direction = "right";
 			}
 			
 			if (InputUtility.getKeyPressed(KeyCode.SPACE)) {
@@ -85,9 +61,21 @@ public class Player extends Entity{
 			if (InputUtility.isLeftClickTriggered()) {
 			}
 			
-			spriteCounter++;
+			// CHECK TILE COLLISION
 			collisionOn = false;
-			gp.cChecker.checkTile(this);
+			gp.getCollisionChecker().checkTile(this);
+			
+			// IF COLLISION IS FALSE, PLAYER CAN MOVE
+			if (collisionOn == false) {
+				switch(direction) {
+				case "up": this.worldY -= speed; break;
+				case "down": this.worldY += speed; break;
+				case "left": this.worldX -= speed; break;
+				case "right": this.worldX += speed; break;
+				}		
+			}
+			
+			spriteCounter++;
 			
 			if (spriteCounter > 12) {
 				if (spriteNum == 1) {
@@ -129,8 +117,26 @@ public class Player extends Entity{
 			} else if (spriteNum == 4) {
 				image = RenderableHolder.getInstance().right4;
 			}
+		default :
+			if (spriteNum == 1) {
+				image = RenderableHolder.getInstance().right1;				
+			} else if (spriteNum == 2) {
+				image = RenderableHolder.getInstance().right2;
+			} else if (spriteNum == 3) {
+				image = RenderableHolder.getInstance().right3;
+			} else if (spriteNum == 4) {
+				image = RenderableHolder.getInstance().right4;
+			}
 		}
 		gc.drawImage(image, screenX, screenY);
 	}
 
+	
+	// GETTER AND SETTER
+	public String getDirection() {
+		return this.direction;
+	}
+	public int getSpeed() {
+		return this.speed;
+	}
 }

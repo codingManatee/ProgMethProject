@@ -21,35 +21,65 @@ public class TileManager implements IRenderable{
 		
 		this.gp = gp;
 		
-		tile = new Tile[10];
+		tile = new Tile[20];
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		
 		getTileImage();
-		loadMap("map/worldmap1.txt");
+		loadMap("map/map1.txt");
 	}
 	
 	public void getTileImage() {
 		
 		tile[0] = new Tile();
-		tile[0].image = RenderableHolder.getInstance().grass;
+		tile[0].image = RenderableHolder.getInstance().blank;
 		
 		tile[1] = new Tile();
-		tile[1].image = RenderableHolder.getInstance().brick;
+		tile[1].image = RenderableHolder.getInstance().topLeft;
 		tile[1].collision = true;
-
+		
 		tile[2] = new Tile();
-		tile[2].image = RenderableHolder.getInstance().water;
+		tile[2].image = RenderableHolder.getInstance().topCenter;
 		tile[2].collision = true;
 		
 		tile[3] = new Tile();
-		tile[3].image = RenderableHolder.getInstance().sand;
+		tile[3].image = RenderableHolder.getInstance().topRight;
+		tile[3].collision = true;
 		
 		tile[4] = new Tile();
-		tile[4].image = RenderableHolder.getInstance().tree;
+		tile[4].image = RenderableHolder.getInstance().centerLeft;
 		tile[4].collision = true;
 		
 		tile[5] = new Tile();
-		tile[5].image = RenderableHolder.getInstance().blank;
+		tile[5].image = RenderableHolder.getInstance().center;
+		tile[5].collision = true;
+		
+		tile[6] = new Tile();
+		tile[6].image = RenderableHolder.getInstance().centerRight;
+		tile[6].collision = true;
+		
+		tile[7] = new Tile();
+		tile[7].image = RenderableHolder.getInstance().bottomLeft;
+		tile[7].collision = true;
+		
+		tile[8] = new Tile();
+		tile[8].image = RenderableHolder.getInstance().bottomCenter;
+		tile[8].collision = true;
+		
+		tile[9] = new Tile();
+		tile[9].image = RenderableHolder.getInstance().bottomRight;
+		tile[9].collision = true;
+		
+		tile[10] = new Tile();
+		tile[10].image = RenderableHolder.getInstance().left;
+		tile[10].collision = true;
+		
+		tile[11] = new Tile();
+		tile[11].image = RenderableHolder.getInstance().middle;
+		tile[11].collision = true;
+		
+		tile[12] = new Tile();
+		tile[12].image = RenderableHolder.getInstance().right;
+		tile[12].collision = true;
 		
 	}
 	
@@ -65,13 +95,13 @@ public class TileManager implements IRenderable{
 			
 			int worldX = worldCol * gp.getTileSize();
 			int worldY = worldRow * gp.getTileSize();
-			int screenX = worldX - gp.player.worldX + gp.player.screenX;
-			int screenY = worldY - gp.player.worldY + gp.player.screenY;
+			int screenX = worldX - gp.getPlayer().worldX + gp.getPlayer().screenX;
+			int screenY = worldY - gp.getPlayer().worldY + gp.getPlayer().screenY;
 			
-			if (worldX + gp.getTileSize() > gp.player.worldX - gp.player.screenX && 
-				worldX - gp.getTileSize() < gp.player.worldX + gp.player.screenX &&
-				worldY + gp.getTileSize() > gp.player.worldY - gp.player.screenY &&
-				worldY - gp.getTileSize() < gp.player.worldY + gp.player.screenY) {
+			if (worldX + gp.getTileSize() > gp.getPlayer().worldX - gp.getPlayer().screenX && 
+				worldX - gp.getTileSize() < gp.getPlayer().worldX + gp.getPlayer().screenX &&
+				worldY + gp.getTileSize() > gp.getPlayer().worldY - gp.getPlayer().screenY &&
+				worldY - gp.getTileSize() < gp.getPlayer().worldY + gp.getPlayer().screenY) {
 				
 				gc.drawImage(tile[tileNum].image, screenX, screenY , gp.getTileSize() , gp.getTileSize() );
 				
@@ -140,5 +170,13 @@ public class TileManager implements IRenderable{
 	public boolean isVisible() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	// GETTER AND SETTER
+	public int[][] getMapTileNum() {
+		return this.mapTileNum;
+	}
+	public Tile[] getTile() {
+		return this.tile;
 	}
 }
