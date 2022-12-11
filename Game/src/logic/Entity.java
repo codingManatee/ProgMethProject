@@ -4,7 +4,7 @@ import sharedObject.IRenderable;
 
 public abstract class Entity implements IRenderable{
 
-	protected double x,y;
+	public int worldX , worldY;
 	protected int z;
 	protected boolean visible,destroyed;
 	

@@ -3,18 +3,18 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.GamePanel;
 import sharedObject.RenderableHolder;
 import tile.TileManager;
 
 public class GameLogic {
 	private List<Entity> gameObjectContainer;
+	GamePanel gp;
 	
-	private Player player;
-	
-	public GameLogic() {
+	public GameLogic(GamePanel gp) {
+		this.gp = gp;
 		this.gameObjectContainer = new ArrayList<Entity>();
-		player = new Player(500,500);
-		addNewObject(player);
+		addNewObject(gp.player);
 	}
 	
 	protected void addNewObject(Entity entity) {
@@ -23,6 +23,6 @@ public class GameLogic {
 	}
 	
 	public void logicUpdate() {
-		player.update();
+		gp.player.update();
 	}
 }

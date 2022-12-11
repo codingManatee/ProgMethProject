@@ -16,15 +16,16 @@ public class TileManager implements IRenderable{
 	Tile[] tile;
 	int mapTileNum[][];
 	
+	
 	public TileManager(GamePanel gp) {
 		
 		this.gp = gp;
 		
 		tile = new Tile[10];
-		mapTileNum = new int[gp.getMaxScreenCol()][gp.getMaxScreenRow()];
+		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		
 		getTileImage();
-		loadMap("map/map1.txt");
+		loadMap("map/worldmap1.txt");
 	}
 	
 	public void getTileImage() {
@@ -47,26 +48,29 @@ public class TileManager implements IRenderable{
 	
 	public void draw(GraphicsContext gc) {
 		
-		int col = 0;
-		int row = 0;
-		int x = 0;
-		int y = 0;
+		int worldCol = 0;
+		int worldRow = 0;
 		
-		while (col < gp.getMaxScreenCol() && row < gp.getMaxScreenRow()) {
+		
+		while (worldCol < gp.getMaxScreenCol() && worldRow < gp.getMaxScreenRow()) {
 			
-			int tileNum = mapTileNum[col][row];
+			int tileNum = mapTileNum[worldCol][worldRow];
+			
+			int worldX = worldCol * gp.getTileSize();
+			int worldY = worldRow * gp.getTileSize();
+			int screenX = worldX - gp.player.worldX + gp.player.screenX;
+			int screenY = worldY - gp.player.worldY + gp.player.screenY;
+			
+			gc.drawImage(tile[tileNum].image, screenX, screenY , gp.getTileSize() , gp.getTileSize() );
+			worldCol++;
+			
+			if (worldCol == gp.getMaxScreenCol()) {
+				worldCol = 0;
+				worldRow++;
+			}
 			//System.out.println(tileNum);
 			
-			gc.drawImage(tile[tileNum].image, x, y,64,64);
-			col++;
-			x += gp.getTileSize();
 			
-			if (col == gp.getMaxScreenCol()) {
-				col = 0;
-				x = 0 ;
-				row++;
-				y += gp.getTileSize();
-			}
 		}
 		
 	}
@@ -79,23 +83,22 @@ public class TileManager implements IRenderable{
 			int col = 0;
 			int row = 0;
 
-			while (col < gp.getMaxScreenCol() && row < gp.getMaxScreenRow()) {
+			while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
 	
 				String line =  br.readLine();
 				
-				while (col < gp.getMaxScreenCol()) {
+				while (col < gp.maxWorldCol) {
 					
 					String numbers[] = line.split(" ");
 					
 					int num = Integer.parseInt(numbers[col]);
-					System.out.println(num);
 					
 					mapTileNum[col][row] = num;
 					col++;
 					
 				}
 				
-				if (col == gp.getMaxScreenCol()) {
+				if (col == gp.maxWorldCol) {
 					col = 0 ;
 					row++;
 				}
