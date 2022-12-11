@@ -48,6 +48,9 @@ public class TileManager implements IRenderable{
 		tile[4].image = RenderableHolder.getInstance().tree;
 		tile[4].collision = true;
 		
+		tile[5] = new Tile();
+		tile[5].image = RenderableHolder.getInstance().blank;
+		
 	}
 	
 	public void draw(GraphicsContext gc) {
@@ -80,7 +83,7 @@ public class TileManager implements IRenderable{
 				worldCol = 0;
 				worldRow++;
 			}
-			System.out.println(tileNum);
+			//System.out.println(tileNum);
 			
 			
 		}

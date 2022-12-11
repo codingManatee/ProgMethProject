@@ -1,6 +1,7 @@
 package main;
 
 import input.InputUtility;
+import logic.CollisionChecker;
 import logic.Player;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
@@ -42,6 +43,9 @@ public class GamePanel extends Canvas{
 	
 	// PLAYER
 	public Player player = new Player(this);
+	
+	// COLLISION CHECKER
+	public CollisionChecker cChecker = new CollisionChecker(this);
 	
 	public GamePanel() {
 		this.setHeight(screenHeight);

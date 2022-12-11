@@ -7,14 +7,15 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+import javafx.scene.shape.Rectangle;
 import main.GamePanel;
 import sharedObject.RenderableHolder;
 
-public class Player extends CollidableEntity{
+public class Player extends Entity{
 	
 	GamePanel gp;
 	
-	private static final int speed = 3;
+	private int speed = 3;
 	private String direction;
 	private int spriteCounter = 0;
 	private int spriteNum = 1;
@@ -27,11 +28,12 @@ public class Player extends CollidableEntity{
 	public Player(GamePanel gp) {
 
 		this.gp = gp;
-		
-		this.direction = "right";		
+		this.direction = "right";	
 		setDefaultValues();
 		screenX = gp.getScreenWidth()/2 - gp.getTileSize()/2;
 		screenY = gp.getScreenHeight()/2 - gp.getTileSize()/2;
+		
+		solidArea = new Rectangle(0,0, gp.getTileSize(), gp.getTileSize());
 	}
 	
 	public void setDefaultValues() {
@@ -44,25 +46,21 @@ public class Player extends CollidableEntity{
 	private void right() {
 		direction = "right";
 		this.worldX += speed;
-		x += speed;
 	}
 	
 	private void left() {
 		direction = "left";
 		this.worldX -= speed;
-		x -= speed;
 	}
 	
 	private void up() {
-		direction = "up";
+		//direction = "up";
 		this.worldY -= speed;
-		y -= speed;
 	}
 	
 	private void down() {
-		direction = "down";
+		//direction = "down";
 		this.worldY += speed;
-		y += speed;
 	}
 	
 	
@@ -79,15 +77,26 @@ public class Player extends CollidableEntity{
 				right();
 			}
 			
+			if (InputUtility.getKeyPressed(KeyCode.SPACE)) {
+				speed++;
+				System.out.println(speed);
+			}
+			
 			if (InputUtility.isLeftClickTriggered()) {
 			}
 			
 			spriteCounter++;
+			collisionOn = false;
+			gp.cChecker.checkTile(this);
 			
 			if (spriteCounter > 12) {
 				if (spriteNum == 1) {
 					spriteNum = 2;
 				} else if (spriteNum == 2) {
+					spriteNum = 3;
+				} else if (spriteNum == 3) {
+					spriteNum = 4;
+				} else if (spriteNum == 4) {
 					spriteNum = 1;
 				}
 				spriteCounter = 0;
@@ -99,34 +108,27 @@ public class Player extends CollidableEntity{
 	public void draw(GraphicsContext gc) {
 		Image image = null;
 		switch(direction) {
-		case "up":
-			if (spriteNum == 1) {
-				image = RenderableHolder.getInstance().up;				
-			} else if (spriteNum == 2) {
-				image = RenderableHolder.getInstance().close;
-			}
-			break;
-		case "down":
-			if (spriteNum == 1) {
-				image = RenderableHolder.getInstance().down;				
-			} else if (spriteNum == 2) {
-				image = RenderableHolder.getInstance().close;
-			}
-			break;
 		case "left":
 			if (spriteNum == 1) {
-				image = RenderableHolder.getInstance().left;				
+				image = RenderableHolder.getInstance().left1;				
 			} else if (spriteNum == 2) {
-				image = RenderableHolder.getInstance().close;
+				image = RenderableHolder.getInstance().left2;
+			} else if (spriteNum == 3) {
+				image = RenderableHolder.getInstance().left3;
+			} else if (spriteNum == 4) {
+				image = RenderableHolder.getInstance().left4;
 			}
 			break;
 		case "right":
 			if (spriteNum == 1) {
-				image = RenderableHolder.getInstance().right;				
+				image = RenderableHolder.getInstance().right1;				
 			} else if (spriteNum == 2) {
-				image = RenderableHolder.getInstance().close;
+				image = RenderableHolder.getInstance().right2;
+			} else if (spriteNum == 3) {
+				image = RenderableHolder.getInstance().right3;
+			} else if (spriteNum == 4) {
+				image = RenderableHolder.getInstance().right4;
 			}
-			break;
 		}
 		gc.drawImage(image, screenX, screenY);
 	}

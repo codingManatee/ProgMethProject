@@ -15,7 +15,8 @@ public class RenderableHolder {
 	private List<IRenderable> entities;
 	private Comparator<IRenderable> comparator;
 	public static Image player_model;
-	public static Image up,down,left,right,close,grass,water,sand,brick,tree;
+	public static Image up,down,left1,left2,left3,left4,right,close,grass,water,sand,brick,tree,blank;
+	public static Image right1,right2,right3,right4;
 	
 	static {
 		loadResource();
@@ -35,10 +36,24 @@ public class RenderableHolder {
 	}
 
 	public static void loadResource() {
-		up = new Image(ClassLoader.getSystemResource("player/up.png").toString());
-		down = new Image(ClassLoader.getSystemResource("player/down.png").toString());
-		left = new Image(ClassLoader.getSystemResource("player/left.png").toString());
-		right = new Image(ClassLoader.getSystemResource("player/right.png").toString());
+//		up = new Image(ClassLoader.getSystemResource("player/up.png").toString());
+//		down = new Image(ClassLoader.getSystemResource("player/down.png").toString());
+//		left = new Image(ClassLoader.getSystemResource("player/left.png").toString());
+//		right = new Image(ClassLoader.getSystemResource("player/right.png").toString());
+		
+		left1 = new Image(ClassLoader.getSystemResource("player/left1.png").toString());
+		left2 = new Image(ClassLoader.getSystemResource("player/left2.png").toString());
+		left3 = new Image(ClassLoader.getSystemResource("player/left3.png").toString());
+		left4 = new Image(ClassLoader.getSystemResource("player/left4.png").toString());
+		
+		right1 = new Image(ClassLoader.getSystemResource("player/right1.png").toString());
+		right2 = new Image(ClassLoader.getSystemResource("player/right2.png").toString());
+		right3 = new Image(ClassLoader.getSystemResource("player/right3.png").toString());
+		right4 = new Image(ClassLoader.getSystemResource("player/right4.png").toString());
+		
+		
+		blank = new Image(ClassLoader.getSystemResource("tiles/blank.png").toString());
+		
 		close = new Image(ClassLoader.getSystemResource("player/close.png").toString());
 		grass = new Image(ClassLoader.getSystemResource("tiles/grass.png").toString());
 		water = new Image(ClassLoader.getSystemResource("tiles/water.png").toString());
