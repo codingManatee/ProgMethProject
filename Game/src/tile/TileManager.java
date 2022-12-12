@@ -10,7 +10,7 @@ import main.GamePanel;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
-public class TileManager implements IRenderable{
+public class TileManager {
 	
 	GamePanel gp;
 	Tile[] tile;
@@ -117,9 +117,6 @@ public class TileManager implements IRenderable{
 				worldCol = 0;
 				worldRow++;
 			}
-			//System.out.println(tileNum);
-			
-			
 		}
 		
 	}
@@ -156,24 +153,6 @@ public class TileManager implements IRenderable{
 		} catch (Exception e) {
 			System.out.println("Loadmap Error");
 		}
-	}
-	
-	@Override
-	public int getZ() {
-		// TODO Auto-generated method stub
-		return -9999;
-	}
-
-	@Override
-	public boolean isDestroyed() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isVisible() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 	
 	// GETTER AND SETTER

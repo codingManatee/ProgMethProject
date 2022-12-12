@@ -1,6 +1,7 @@
 package object;
 
 import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
 
 public class Bit extends SuperObject{
 	public Bit() {

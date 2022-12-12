@@ -15,7 +15,7 @@ public class Player extends Entity{
 	
 	GamePanel gp;
 	
-	private double speed = 3;
+	private double speed = 1;
 	private String direction;
 	
 	private int spriteCounter = 0;
@@ -29,15 +29,23 @@ public class Player extends Entity{
 	public Player(GamePanel gp) {
 
 		this.gp = gp;
-		this.direction = "right";	
+		this.direction = "left";	
 		setDefaultValues();
 		screenX = gp.getScreenWidth()/2 - gp.getTileSize()/2;
 		screenY = gp.getScreenHeight()/2 - gp.getTileSize()/2;
 		
-		solidArea = new Rectangle(16,16,32,32);
+		// HITBOX
+		solidArea = new Rectangle(8,8,48,48);
+		
+		// PICKUP RANGE
+		//pickRange = new Rectangle(56,0,8,8);
+		pickRange = new Rectangle(30,30,4,4);
+		
 		solidAreaDefaultX = (int) solidArea.getX();
 		solidAreaDefaultY = (int) solidArea.getY();
 		 
+		pickRangeDefaultX = (int) pickRange.getX();
+		pickRangeDefaultY = (int) pickRange.getY();
 	}
 	
 	public void setDefaultValues() {
@@ -70,12 +78,13 @@ public class Player extends Entity{
 			collisionOnTop = false;
 			collisionOnBottom = false;
 			
-			speed = 3;
+			speed = 1;
 		}
 		
 		if (!(collisionOnLeft||collisionOnRight||collisionOnTop||collisionOnBottom)) {
-			speed += 0.3;
+			speed += 0.1;
 		}
+		
 		
 		// CHECK OBJECT COLLISION
 		gp.getCollisionChecker().checkTile(this);
@@ -116,6 +125,8 @@ public class Player extends Entity{
 			} else if (spriteNum == 3) {
 				spriteNum = 4;
 			} else if (spriteNum == 4) {
+				spriteNum = 5;
+			} else if (spriteNum == 5) {
 				spriteNum = 1;
 			}
 			spriteCounter = 0;
@@ -131,13 +142,17 @@ public class Player extends Entity{
 				curScore++;
 				gp.getSuperObject()[i] = null;
 				break;
-			case "Spring":
-				direction = "up";
+			case "bottomLeft":
+				if (direction == "left") {					
+					direction = "up";
+				} else if (direction == "down") {
+					direction = "right";
+				}
 				break;
 			}
 		}
 	}
-	
+
 	@Override
 	public void draw(GraphicsContext gc) {
 		Image image = null;
@@ -151,6 +166,8 @@ public class Player extends Entity{
 				image = RenderableHolder.getInstance().left3;
 			} else if (spriteNum == 4) {
 				image = RenderableHolder.getInstance().left4;
+			} else if (spriteNum == 5) {
+				image = RenderableHolder.getInstance().left5;
 			}
 			break;
 		case "right":
@@ -162,7 +179,10 @@ public class Player extends Entity{
 				image = RenderableHolder.getInstance().right3;
 			} else if (spriteNum == 4) {
 				image = RenderableHolder.getInstance().right4;
+			} else if (spriteNum == 5) {
+				image = RenderableHolder.getInstance().right5;
 			}
+			
 		default :
 			if (spriteNum == 1) {
 				image = RenderableHolder.getInstance().right1;				
@@ -172,7 +192,9 @@ public class Player extends Entity{
 				image = RenderableHolder.getInstance().right3;
 			} else if (spriteNum == 4) {
 				image = RenderableHolder.getInstance().right4;
-			}
+			} else if (spriteNum == 5) {
+				image = RenderableHolder.getInstance().right5;
+			} 
 		}
 		gc.drawImage(image, screenX, screenY);
 	}

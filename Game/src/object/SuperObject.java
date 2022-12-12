@@ -10,9 +10,9 @@ public class SuperObject {
 	public String name;
 	public boolean collision = false;
 	public int worldX,worldY;
-	
+
 	// SET OBJECT RANGE
-	public Rectangle solidArea = new Rectangle(0,0,64,64);
+	public Rectangle solidArea = new Rectangle(48,8,8,8);
 	public int solidAreaDefaultX = 0;
 	public int solidAreaDefaultY = 0;
 	

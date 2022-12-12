@@ -63,6 +63,7 @@ public class CollisionChecker {
 			break;
 		}	
 	}
+	
 	public int checkObject(Entity entity,boolean player) {
 		
 		int index = 999;
@@ -72,8 +73,8 @@ public class CollisionChecker {
 			if (gp.getSuperObject()[i] != null) {
 				
 				// Get entity's solid area position
-				entity.solidArea.setX(entity.worldX + entity.solidArea.getX());
-				entity.solidArea.setY(entity.worldY + entity.solidArea.getY());
+				entity.pickRange.setX(entity.worldX + entity.pickRange.getX());
+				entity.pickRange.setY(entity.worldY + entity.pickRange.getY());
 				
 				// Get the object's solid area position
 				gp.getSuperObject()[i].solidArea.setX(gp.getSuperObject()[i].worldX + gp.getSuperObject()[i].solidArea.getX());
@@ -81,8 +82,8 @@ public class CollisionChecker {
 				
 				switch(gp.getPlayer().getDirection()) {
 				case "up" :
-					entity.solidArea.setY(entity.solidArea.getY() - gp.getPlayer().getSpeed());
-					if (entity.solidArea.intersects(gp.getSuperObject()[i].solidArea.getBoundsInLocal())) {
+					entity.pickRange.setY(entity.pickRange.getY() - gp.getPlayer().getSpeed());
+					if (entity.pickRange.intersects(gp.getSuperObject()[i].solidArea.getBoundsInLocal())) {
 						if (gp.getSuperObject()[i].collision == true) {
 							entity.collisionOnTop = true;
 						}
@@ -92,8 +93,8 @@ public class CollisionChecker {
 					}
 					break;
 				case "down":
-					entity.solidArea.setY(entity.solidArea.getY() + gp.getPlayer().getSpeed());
-					if (entity.solidArea.intersects(gp.getSuperObject()[i].solidArea.getBoundsInLocal())) {
+					entity.pickRange.setY(entity.pickRange.getY() + gp.getPlayer().getSpeed());
+					if (entity.pickRange.intersects(gp.getSuperObject()[i].solidArea.getBoundsInLocal())) {
 						if (gp.getSuperObject()[i].collision == true) {
 							entity.collisionOnBottom = true;
 						}
@@ -103,8 +104,8 @@ public class CollisionChecker {
 					}
 					break;
 				case "left":
-					entity.solidArea.setX(entity.solidArea.getX() - gp.getPlayer().getSpeed());
-					if (entity.solidArea.intersects(gp.getSuperObject()[i].solidArea.getBoundsInLocal())) {
+					entity.pickRange.setX(entity.pickRange.getX() - gp.getPlayer().getSpeed());
+					if (entity.pickRange.intersects(gp.getSuperObject()[i].solidArea.getBoundsInLocal())) {
 						if (gp.getSuperObject()[i].collision == true) {
 							entity.collisionOnLeft = true;
 						}
@@ -114,8 +115,8 @@ public class CollisionChecker {
 					}
 					break;
 				case "right":
-					entity.solidArea.setX(entity.solidArea.getX() + gp.getPlayer().getSpeed());
-					if (entity.solidArea.intersects(gp.getSuperObject()[i].solidArea.getBoundsInLocal())) {
+					entity.pickRange.setX(entity.pickRange.getX() + gp.getPlayer().getSpeed());
+					if (entity.pickRange.intersects(gp.getSuperObject()[i].solidArea.getBoundsInLocal())) {
 						if (gp.getSuperObject()[i].collision == true) {
 							entity.collisionOnRight = true;
 						}
@@ -125,13 +126,14 @@ public class CollisionChecker {
 					}
 					break;
 				}
-				entity.solidArea.setX(entity.solidAreaDefaultX);
-				entity.solidArea.setY(entity.solidAreaDefaultY);
+				
+				entity.pickRange.setX(entity.pickRangeDefaultX);
+				entity.pickRange.setY(entity.pickRangeDefaultY);
 				gp.getSuperObject()[i].solidArea.setX(gp.getSuperObject()[i].solidAreaDefaultX);
 				gp.getSuperObject()[i].solidArea.setY(gp.getSuperObject()[i].solidAreaDefaultY);
 			}
 		}
-		
+	
 		return index;
 	}
 }

@@ -26,7 +26,7 @@ public class AssetSetter {
 		gp.getSuperObject()[2].worldX = 10 * gp.getTileSize();
 		gp.getSuperObject()[2].worldY = 5 * gp.getTileSize();
 		
-		gp.getSuperObject()[3] = new Spring();
+		gp.getSuperObject()[3] = new Spring("bottomLeft");
 		gp.getSuperObject()[3].worldX = 5 * gp.getTileSize();
 		gp.getSuperObject()[3].worldY = 10 * gp.getTileSize();
 		
