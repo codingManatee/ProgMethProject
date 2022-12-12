@@ -20,6 +20,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class GamePanel extends Canvas{
 	
@@ -39,18 +40,15 @@ public class GamePanel extends Canvas{
 	public final int worldWidth = maxWorldCol * tileSize;
 	public final int worldHeight = maxWorldRow * tileSize; 
 	
-	// TILE MANAGER
-	TileManager tileM = new TileManager(this);
-	
-	// PLAYER
+	// PLAYER AND OBJECT
 	Player player = new Player(this);
-	
-	// COLLISION CHECKER
-	CollisionChecker cChecker = new CollisionChecker(this);
-	
-	// OBJECT IN GAME
 	SuperObject obj[] = new SuperObject[10];
 	AssetSetter aSetter = new AssetSetter(this);
+	
+	// SYSTEM
+	TileManager tileM = new TileManager(this);
+	CollisionChecker cChecker = new CollisionChecker(this);
+	
 	
 	public GamePanel() {
 		this.setHeight(screenHeight);
@@ -106,6 +104,7 @@ public class GamePanel extends Canvas{
 	public void setUpGame() {
 		
 		aSetter.setObject();
+		
 	}
 	
 	// CANVAS PAINTER
@@ -122,7 +121,11 @@ public class GamePanel extends Canvas{
 				obj[i].draw(gc, this);
 			}
 		}
-		
+		gc.setFill(Color.WHITE);
+		Font font = new Font(40);
+		gc.setFont(font);
+		gc.fillText(Integer.toString(player.curScore),screenWidth - 40 ,50);
+
 		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
 			// PLAYER
 			if (entity.isVisible() && !entity.isDestroyed()) {
@@ -136,7 +139,6 @@ public class GamePanel extends Canvas{
 	public int getTileSize() {
 		return this.tileSize;
 	}
-	
 	public int getMaxScreenCol() {
 		return this.maxScreenCol;
 	}

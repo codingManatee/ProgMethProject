@@ -15,6 +15,6 @@ public class GamePanel extends Pane{
 	final int screenHeight = tileSize * maxScreenRow;
 	
 	public GamePanel() {
-		this.set
+
 	}
 }
