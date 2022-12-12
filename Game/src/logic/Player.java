@@ -1,6 +1,7 @@
 package logic;
 
 import input.InputUtility;
+import object.Lever;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
@@ -15,7 +16,7 @@ public class Player extends Entity{
 	
 	GamePanel gp;
 	
-	private double speed = 1;
+	private double speed = 3;
 	private String direction;
 	
 	private int spriteCounter = 0;
@@ -25,11 +26,12 @@ public class Player extends Entity{
 	public final int screenY;
 	
 	public int curScore;
+	public int hasKey;
 	
 	public Player(GamePanel gp) {
 
 		this.gp = gp;
-		this.direction = "left";	
+		this.direction = "down";	
 		setDefaultValues();
 		screenX = gp.getScreenWidth()/2 - gp.getTileSize()/2;
 		screenY = gp.getScreenHeight()/2 - gp.getTileSize()/2;
@@ -39,7 +41,8 @@ public class Player extends Entity{
 		
 		// PICKUP RANGE
 		//pickRange = new Rectangle(56,0,8,8);
-		pickRange = new Rectangle(30,30,4,4);
+		pickRange = new Rectangle(8,8,48,48);
+
 		
 		solidAreaDefaultX = (int) solidArea.getX();
 		solidAreaDefaultY = (int) solidArea.getY();
@@ -50,11 +53,11 @@ public class Player extends Entity{
 	
 	public void setDefaultValues() {
 		
-		worldX = gp.getTileSize() * 8;
+		worldX = gp.getTileSize() * 12;
 		worldY = gp.getTileSize() * 5;
 		
 	}
-	
+
 	public void update() {
 		if ((InputUtility.getKeyPressed(KeyCode.W)||InputUtility.getKeyPressed(KeyCode.S)
 				||InputUtility.getKeyPressed(KeyCode.A)||InputUtility.getKeyPressed(KeyCode.D))
@@ -78,7 +81,7 @@ public class Player extends Entity{
 			collisionOnTop = false;
 			collisionOnBottom = false;
 			
-			speed = 1;
+			speed = 3;
 		}
 		
 		if (!(collisionOnLeft||collisionOnRight||collisionOnTop||collisionOnBottom)) {
@@ -149,6 +152,29 @@ public class Player extends Entity{
 					direction = "right";
 				}
 				break;
+			case "Key":
+				hasKey++;
+				gp.getSuperObject()[i] = null;
+				break;
+			case "Door":
+				if (hasKey > 0 && InputUtility.getKeyPressed(KeyCode.E)) {
+					hasKey--;
+					gp.getSuperObject()[i] = null;
+				}
+				break;
+			case "Lever":
+				if (InputUtility.isLeftClickTriggered()) {
+					Lever tmp = (Lever) gp.getSuperObject()[i];
+					if (tmp.isOn == false) {						
+						gp.getSuperObject()[i].image = new Image(ClassLoader.getSystemResource("objects/leverOn.png").toString());
+						((Lever)gp.getSuperObject()[i]).setOn(true);
+						System.out.println("ON");
+					} else {
+						gp.getSuperObject()[i].image = new Image(ClassLoader.getSystemResource("objects/leverOff.png").toString());
+						((Lever)gp.getSuperObject()[i]).setOn(false);
+						System.out.println("OFF");
+					}
+				}
 			}
 		}
 	}

@@ -12,10 +12,10 @@ public class SuperObject {
 	public int worldX,worldY;
 
 	// SET OBJECT RANGE
-	public Rectangle solidArea = new Rectangle(48,8,8,8);
+	public Rectangle solidArea = new Rectangle(0,0,64,64);
 	public int solidAreaDefaultX = 0;
 	public int solidAreaDefaultY = 0;
-	
+
 	public void draw(GraphicsContext gc, GamePanel gp) {
 		
 		int screenX = worldX - gp.getPlayer().worldX + gp.getPlayer().screenX;

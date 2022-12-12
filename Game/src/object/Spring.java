@@ -9,7 +9,7 @@ public class Spring extends SuperObject{
 		case "bottomLeft":
 			this.name = "bottomLeft";
 			// SET PICKUP RANGE
-			this.solidArea = new Rectangle(30,30,4,4);
+			this.solidArea = new Rectangle(16,128,32,32);
 			
 			try {
 				image = new Image(ClassLoader.getSystemResource("objects/bit.png").toString());

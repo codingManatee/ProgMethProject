@@ -11,6 +11,7 @@ import tile.TileManager;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -35,16 +36,16 @@ public class GamePanel extends Canvas{
 	final int screenHeight = tileSize * maxScreenRow; //576 pixels
 	
 	// WORLD SETTING
-	public final int maxWorldCol = 30;
+	public final int maxWorldCol = 49;
 	public final int maxWorldRow = 30;
 	public final int worldWidth = maxWorldCol * tileSize;
 	public final int worldHeight = maxWorldRow * tileSize; 
 	
 	// PLAYER AND OBJECT
 	Player player = new Player(this);
-	SuperObject obj[] = new SuperObject[10];
+	SuperObject obj[] = new SuperObject[1000];
 	AssetSetter aSetter = new AssetSetter(this);
-	
+
 	// SYSTEM
 	TileManager tileM = new TileManager(this);
 	CollisionChecker cChecker = new CollisionChecker(this);
@@ -77,7 +78,8 @@ public class GamePanel extends Canvas{
 			if (event.getButton() == MouseButton.PRIMARY)
 				InputUtility.mouseLeftRelease();
 		});
-		
+
+	
 		this.setOnMouseEntered((MouseEvent event) -> {
 			InputUtility.mouseOnScreen = true;
 		});

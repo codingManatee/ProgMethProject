@@ -1,0 +1,18 @@
+package object;
+
+import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
+
+public class Door extends SuperObject{
+	public Door() {
+		this.name = "Door";
+		this.solidArea = new Rectangle(0,0,64,64);
+		collision = true;
+		
+		try {
+			this.image = new Image(ClassLoader.getSystemResource("objects/door.png").toString());
+		} catch (Exception e){
+			System.out.println("Load Door's image Fail");
+		}
+	}
+}
