@@ -4,6 +4,7 @@ import input.InputUtility;
 import logic.AssetSetter;
 import logic.CollisionChecker;
 import logic.Player;
+import logic.Sound;
 import object.SuperObject;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
@@ -36,8 +37,8 @@ public class GamePanel extends Canvas{
 	final int screenHeight = tileSize * maxScreenRow; //576 pixels
 	
 	// WORLD SETTING
-	public final int maxWorldCol = 49;
-	public final int maxWorldRow = 30;
+	public final int maxWorldCol = 64;
+	public final int maxWorldRow = 64;
 	public final int worldWidth = maxWorldCol * tileSize;
 	public final int worldHeight = maxWorldRow * tileSize; 
 	
@@ -49,7 +50,7 @@ public class GamePanel extends Canvas{
 	// SYSTEM
 	TileManager tileM = new TileManager(this);
 	CollisionChecker cChecker = new CollisionChecker(this);
-	
+	Sound sound = new Sound();
 	
 	public GamePanel() {
 		this.setHeight(screenHeight);
@@ -59,6 +60,14 @@ public class GamePanel extends Canvas{
 		
 	}
 
+	// START SETTING
+	public void setUpGame() {
+		
+		aSetter.setObject();
+		playMusic(0);
+	}
+
+	
 	// INPUT KEY
 	public void addListener() {
 		this.setOnKeyPressed((KeyEvent event) -> {
@@ -103,12 +112,6 @@ public class GamePanel extends Canvas{
 		});
 	}
 	
-	public void setUpGame() {
-		
-		aSetter.setObject();
-		
-	}
-	
 	// CANVAS PAINTER
 	public void paintComponent() {
 		GraphicsContext gc = this.getGraphicsContext2D();
@@ -137,6 +140,23 @@ public class GamePanel extends Canvas{
 
 	}
 	
+	public void playMusic(int i) {
+		
+		sound.setFile(i);
+		sound.play();
+		sound.loop();
+	}
+	
+	public void stopMusic() {
+		
+		sound.stop();
+	}
+	
+	public void playSE(int i) {
+		
+		sound.setFile(i);
+		sound.play();
+	}
 	// Getter and Setter
 	public int getTileSize() {
 		return this.tileSize;

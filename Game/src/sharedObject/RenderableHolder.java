@@ -21,7 +21,7 @@ public class RenderableHolder {
 	
 	// TILES TEXTURE
 	public static Image topLeft,topRight,topCenter,centerLeft,centerRight,center,bottomCenter,bottomLeft,bottomRight;
-	public static Image left,middle,right;
+	public static Image left,middle,middleh,right,tup,tdown;
 	public static Image blank,xblank;
 	
 	static {
@@ -73,8 +73,10 @@ public class RenderableHolder {
 		
 		left = new Image(ClassLoader.getSystemResource("tiles/left.png").toString());
 		middle = new Image(ClassLoader.getSystemResource("tiles/middle.png").toString());
+		middleh = new Image(ClassLoader.getSystemResource("tiles/middleh.png").toString());
 		right = new Image(ClassLoader.getSystemResource("tiles/right.png").toString());
-		
+		tup = new Image(ClassLoader.getSystemResource("tiles/up.png").toString());
+		tdown= new Image(ClassLoader.getSystemResource("tiles/down.png").toString());
 	}
 
 	public void add(IRenderable entity) {

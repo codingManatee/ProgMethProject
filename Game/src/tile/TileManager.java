@@ -25,7 +25,7 @@ public class TileManager {
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		
 		getTileImage();
-		loadMap("map/map1.txt");
+		loadMap("map/wtf.txt");
 	}
 	
 	public void getTileImage() {
@@ -85,6 +85,17 @@ public class TileManager {
 		tile[13].image = RenderableHolder.getInstance().right;
 		tile[13].collision = true;
 		
+		tile[14] = new Tile();
+		tile[14].image = RenderableHolder.getInstance().middleh;
+		tile[14].collision = true;
+		
+		tile[15] = new Tile();
+		tile[15].image = RenderableHolder.getInstance().tup;
+		tile[15].collision = true;
+		
+		tile[16] = new Tile();
+		tile[16].image = RenderableHolder.getInstance().tdown;
+		tile[16].collision = true;
 	}
 	
 	public void draw(GraphicsContext gc) {

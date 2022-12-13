@@ -18,6 +18,7 @@ public class Player extends Entity{
 	
 	private double speed = 3;
 	private String direction;
+	private String faceDirection = "right";
 	
 	private int spriteCounter = 0;
 	private int spriteNum = 1;
@@ -53,8 +54,8 @@ public class Player extends Entity{
 	
 	public void setDefaultValues() {
 		
-		worldX = gp.getTileSize() * 12;
-		worldY = gp.getTileSize() * 5;
+		worldX = gp.getTileSize() * 11;
+		worldY = gp.getTileSize() * 54;
 		
 	}
 
@@ -68,8 +69,10 @@ public class Player extends Entity{
 				direction = "down";
 			} else if (InputUtility.getKeyPressed(KeyCode.A)) {
 				direction = "left";
+				faceDirection = "left";
 			} else if (InputUtility.getKeyPressed(KeyCode.D)) {
 				direction = "right";
+				faceDirection = "right";
 			}
 	
 			if (InputUtility.isLeftClickTriggered()) {
@@ -182,7 +185,7 @@ public class Player extends Entity{
 	@Override
 	public void draw(GraphicsContext gc) {
 		Image image = null;
-		switch(direction) {
+		switch(faceDirection) {
 		case "left":
 			if (spriteNum == 1) {
 				image = RenderableHolder.getInstance().left1;				
@@ -209,18 +212,6 @@ public class Player extends Entity{
 				image = RenderableHolder.getInstance().right5;
 			}
 			
-		default :
-			if (spriteNum == 1) {
-				image = RenderableHolder.getInstance().right1;				
-			} else if (spriteNum == 2) {
-				image = RenderableHolder.getInstance().right2;
-			} else if (spriteNum == 3) {
-				image = RenderableHolder.getInstance().right3;
-			} else if (spriteNum == 4) {
-				image = RenderableHolder.getInstance().right4;
-			} else if (spriteNum == 5) {
-				image = RenderableHolder.getInstance().right5;
-			} 
 		}
 		gc.drawImage(image, screenX, screenY);
 	}
