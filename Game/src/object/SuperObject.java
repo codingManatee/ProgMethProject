@@ -3,13 +3,17 @@ package object;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+import logic.Player;
+import logic.Sound;
 import main.GamePanel;
 
-public class SuperObject {
+public abstract class SuperObject {
 	public Image image;
 	public String name;
 	public boolean collision = false;
 	public int worldX,worldY;
+	
+	Sound sound = new Sound();
 
 	// SET OBJECT RANGE
 	public Rectangle solidArea = new Rectangle(0,0,64,64);
@@ -29,5 +33,7 @@ public class SuperObject {
 			gc.drawImage(image, screenX, screenY , gp.getTileSize() , gp.getTileSize() );
 		}
 	}
+	
+	public abstract void interact(Player player);
 	
 }

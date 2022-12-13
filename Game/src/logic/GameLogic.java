@@ -10,14 +10,15 @@ import tile.TileManager;
 public class GameLogic {
 	private List<Entity> gameObjectContainer;
 	GamePanel gp;
+	public int gameState = 0;
 	
 	public GameLogic(GamePanel gp) {
 		this.gp = gp;
 		this.gameObjectContainer = new ArrayList<Entity>();
 		
 		gp.setUpGame();
-		
-		addNewObject(gp.getPlayer());
+		addNewObject(gp.getPlayer());			
+
 	}
 	
 	protected void addNewObject(Entity entity) {

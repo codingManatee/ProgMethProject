@@ -2,6 +2,7 @@ package object;
 
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+import logic.Player;
 
 public class Door extends SuperObject{
 	public Door() {
@@ -10,9 +11,15 @@ public class Door extends SuperObject{
 		collision = true;
 		
 		try {
-			this.image = new Image(ClassLoader.getSystemResource("objects/door.png").toString());
+			this.image = new Image(ClassLoader.getSystemResource("objects/door.gif").toString());
 		} catch (Exception e){
 			System.out.println("Load Door's image Fail");
 		}
+	}
+
+	@Override
+	public void interact(Player player) {
+		// TODO Auto-generated method stub
+
 	}
 }

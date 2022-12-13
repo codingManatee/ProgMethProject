@@ -27,8 +27,8 @@ import javafx.scene.text.Font;
 public class GamePanel extends Canvas{
 	
 	// SCREEN SETTING
-	final int originalTileSize = 32; // 32x32 tile
-	final int scale = 2;
+	final int originalTileSize = 64; // 32x32 tile
+	final int scale = 1;
 	
 	final int tileSize = originalTileSize * scale; // 64x64 tile
 	final int maxScreenCol = 16;
@@ -39,9 +39,7 @@ public class GamePanel extends Canvas{
 	// WORLD SETTING
 	public int maxWorldCol;
 	public int maxWorldRow;
-//	public final int worldWidth = maxWorldCol * tileSize;
-//	public final int worldHeight = maxWorldRow * tileSize; 
-	
+
 	// PLAYER AND OBJECT
 	Player player = new Player(this);
 	SuperObject obj[] = new SuperObject[1000];
@@ -116,47 +114,57 @@ public class GamePanel extends Canvas{
 	public void paintComponent() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.WHITE);
-		
 		// TILE
-		tileM.draw(gc);
-		
-		// OBJECT
-		for (int i = 0 ; i < obj.length ; i++) {
-			if (obj[i] != null) {
-				obj[i].draw(gc, this);
+		if (player.dead == false) {			
+			tileM.draw(gc);
+			
+			// OBJECT
+			for (int i = 0 ; i < obj.length ; i++) {
+				if (obj[i] != null) {
+					obj[i].draw(gc, this);
+				}
 			}
-		}
-		gc.setFill(Color.WHITE);
-		Font font = new Font(40);
-		gc.setFont(font);
-		gc.fillText(Integer.toString(player.curScore),screenWidth - 40 ,50);
-
-		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
-			// PLAYER
-			if (entity.isVisible() && !entity.isDestroyed()) {
-				entity.draw(gc);
+			gc.setFill(Color.WHITE);
+			Font font = new Font(40);
+			gc.setFont(font);
+			gc.fillText(Integer.toString(player.curScore),screenWidth - 40 ,50);
+			
+			for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
+				// PLAYER
+				if (entity.isVisible() && !entity.isDestroyed()) {
+					entity.draw(gc);
+				}
 			}
+		} else {
+			gc.setFill(Color.BLACK);
+			gc.fillRect(0, 0, screenWidth, screenHeight);
+			
+			gc.setFill(Color.WHITE);
+			Font font = new Font(100);
+			gc.setFont(font);
+			gc.fillText("GAME OVER",screenWidth-775,screenHeight/2);
 		}
-
 	}
 	
+	
+	// SOUND PLAYER
 	public void playMusic(int i) {
 		
 		sound.setFile(i);
 		sound.play();
 		sound.loop();
 	}
-	
 	public void stopMusic() {
 		
 		sound.stop();
 	}
-	
 	public void playSE(int i) {
 		
 		sound.setFile(i);
 		sound.play();
 	}
+	
+	
 	// Getter and Setter
 	public int getTileSize() {
 		return this.tileSize;

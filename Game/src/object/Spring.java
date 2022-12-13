@@ -2,6 +2,7 @@ package object;
 
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+import logic.Player;
 
 public class Spring extends SuperObject{
 	public Spring(String name) {
@@ -19,6 +20,12 @@ public class Spring extends SuperObject{
 		}
 	
 			
+	}
+
+	@Override
+	public void interact(Player player) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

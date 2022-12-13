@@ -25,15 +25,14 @@ public class TileManager {
 		this.gp = gp;
 		
 		// CHANGE YOUR MAP NAME HERE
-		this.mapName = "map/newMap.txt";
+		this.mapName = "map/finalMap.txt";
+		
 		
 		// READ TILE DATA FILE // ALSO CHANGE WITH MAP
 		InputStream is = ClassLoader.getSystemResourceAsStream("map/tiledata.txt".toString());
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));			
-
+	
 		
-		
-				
 		// GETTING TILE NAMES AND COLLISION INFO FROM THE TILE
 		String line;
 		try {
@@ -48,6 +47,7 @@ public class TileManager {
 	
 		tile = new Tile[fileNames.size()];
 		getTileImage();
+		
 		
 		// GET THE maxWorldCol & maxWorldRow
 		is = ClassLoader.getSystemResourceAsStream(mapName.toString());

@@ -12,6 +12,7 @@ import logic.GameLogic;
 import sharedObject.RenderableHolder;
 
 public class Main extends Application{
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -26,7 +27,7 @@ public class Main extends Application{
 		GameLogic logic = new GameLogic(gamePanel);
 		root.getChildren().add(gamePanel);
 		gamePanel.requestFocus();
-		
+	
 		stage.show();
 
 		AnimationTimer animation = new AnimationTimer() {

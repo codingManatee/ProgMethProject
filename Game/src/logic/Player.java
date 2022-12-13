@@ -29,6 +29,8 @@ public class Player extends Entity{
 	public int curScore;
 	public int hasKey;
 	
+	public boolean dead = false;
+	
 	public Player(GamePanel gp) {
 
 		this.gp = gp;
@@ -41,7 +43,6 @@ public class Player extends Entity{
 		solidArea = new Rectangle(8,8,48,48);
 		
 		// PICKUP RANGE
-		//pickRange = new Rectangle(56,0,8,8);
 		pickRange = new Rectangle(8,8,48,48);
 
 		
@@ -54,8 +55,8 @@ public class Player extends Entity{
 	
 	public void setDefaultValues() {
 		
-		worldX = gp.getTileSize() * 6;
-		worldY = gp.getTileSize() * 4;
+		worldX = gp.getTileSize() * 11;
+		worldY = gp.getTileSize() * 91;
 		
 	}
 
@@ -146,6 +147,7 @@ public class Player extends Entity{
 			switch(objectName) {
 			case "Bit":
 				curScore++;
+				gp.getSuperObject()[i].interact(this);
 				gp.getSuperObject()[i] = null;
 				break;
 			case "bottomLeft":
@@ -156,28 +158,28 @@ public class Player extends Entity{
 				}
 				break;
 			case "Key":
-				hasKey++;
+				gp.getSuperObject()[i].interact(this);
 				gp.getSuperObject()[i] = null;
+				gp.playSE(3);
 				break;
 			case "Door":
 				if (hasKey > 0 && InputUtility.getKeyPressed(KeyCode.E)) {
-					hasKey--;
 					gp.getSuperObject()[i] = null;
+					hasKey--;
+					gp.playSE(2);
 				}
 				break;
 			case "Lever":
-				if (InputUtility.isLeftClickTriggered()) {
-					Lever tmp = (Lever) gp.getSuperObject()[i];
-					if (tmp.isOn == false) {						
-						gp.getSuperObject()[i].image = new Image(ClassLoader.getSystemResource("objects/leverOn.png").toString());
-						((Lever)gp.getSuperObject()[i]).setOn(true);
-						System.out.println("ON");
-					} else {
-						gp.getSuperObject()[i].image = new Image(ClassLoader.getSystemResource("objects/leverOff.png").toString());
-						((Lever)gp.getSuperObject()[i]).setOn(false);
-						System.out.println("OFF");
-					}
-				}
+				gp.getSuperObject()[i].interact(this);
+				break;
+			case "Coin":
+				gp.getSuperObject()[i].interact(this);
+				gp.playSE(1);
+				gp.getSuperObject()[i] = null;
+				break;
+			case "Fire":
+				gp.getSuperObject()[i].interact(this);
+				break;
 			}
 		}
 	}
@@ -222,5 +224,10 @@ public class Player extends Entity{
 	}
 	public double getSpeed() {
 		return this.speed;
+	}
+
+	public void Dead() {
+		this.dead = true;
+		gp.stopMusic();
 	}
 }
