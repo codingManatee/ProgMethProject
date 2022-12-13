@@ -3,6 +3,7 @@ package tile;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -14,88 +15,90 @@ public class TileManager {
 	
 	GamePanel gp;
 	Tile[] tile;
+	String mapName;
 	int mapTileNum[][];
-	
+	ArrayList<String> fileNames = new ArrayList<>();
+	ArrayList<String> collisionStatus = new ArrayList<>();
 	
 	public TileManager(GamePanel gp) {
 		
 		this.gp = gp;
 		
-		tile = new Tile[20];
-		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+		// CHANGE YOUR MAP NAME HERE
+		this.mapName = "map/newMap.txt";
 		
+		// READ TILE DATA FILE // ALSO CHANGE WITH MAP
+		InputStream is = ClassLoader.getSystemResourceAsStream("map/tiledata.txt".toString());
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));			
+
+		
+		
+				
+		// GETTING TILE NAMES AND COLLISION INFO FROM THE TILE
+		String line;
+		try {
+			while ((line = br.readLine()) != null) {
+				fileNames.add(line);
+				collisionStatus.add(br.readLine());
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		tile = new Tile[fileNames.size()];
 		getTileImage();
-		loadMap("map/wtf.txt");
+		
+		// GET THE maxWorldCol & maxWorldRow
+		is = ClassLoader.getSystemResourceAsStream(mapName.toString());
+		br = new BufferedReader(new InputStreamReader(is));
+		try {
+			String line2 = br.readLine();
+			String maxTile[] = line2.split(" ");
+			
+			gp.maxWorldCol = maxTile.length;
+			gp.maxWorldRow = maxTile.length;
+			mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+			
+			br.close();
+			
+		} catch (Exception e) {
+			System.out.println("Read Map Error");
+		}
+		
+		loadMap(mapName);
+	
 	}
 	
 	public void getTileImage() {
 		
-		tile[0] = new Tile();
-		tile[0].image = RenderableHolder.getInstance().blank;
-		
-		tile[1] = new Tile();
-		tile[1].image = RenderableHolder.getInstance().xblank;
-		tile[1].collision = true;
-		
-		tile[2] = new Tile();
-		tile[2].image = RenderableHolder.getInstance().topLeft;
-		tile[2].collision = true;
-		
-		tile[3] = new Tile();
-		tile[3].image = RenderableHolder.getInstance().topCenter;
-		tile[3].collision = true;
-		
-		tile[4] = new Tile();
-		tile[4].image = RenderableHolder.getInstance().topRight;
-		tile[4].collision = true;
-		
-		tile[5] = new Tile();
-		tile[5].image = RenderableHolder.getInstance().centerLeft;
-		tile[5].collision = true;
-		
-		tile[6] = new Tile();
-		tile[6].image = RenderableHolder.getInstance().center;
-		tile[6].collision = true;
-		
-		tile[7] = new Tile();
-		tile[7].image = RenderableHolder.getInstance().centerRight;
-		tile[7].collision = true;
-		
-		tile[8] = new Tile();
-		tile[8].image = RenderableHolder.getInstance().bottomLeft;
-		tile[8].collision = true;
-		
-		tile[9] = new Tile();
-		tile[9].image = RenderableHolder.getInstance().bottomCenter;
-		tile[9].collision = true;
-		
-		tile[10] = new Tile();
-		tile[10].image = RenderableHolder.getInstance().bottomRight;
-		tile[10].collision = true;
-		
-		tile[11] = new Tile();
-		tile[11].image = RenderableHolder.getInstance().left;
-		tile[11].collision = true;
-		
-		tile[12] = new Tile();
-		tile[12].image = RenderableHolder.getInstance().middle;
-		tile[12].collision = true;
-		
-		tile[13] = new Tile();
-		tile[13].image = RenderableHolder.getInstance().right;
-		tile[13].collision = true;
-		
-		tile[14] = new Tile();
-		tile[14].image = RenderableHolder.getInstance().middleh;
-		tile[14].collision = true;
-		
-		tile[15] = new Tile();
-		tile[15].image = RenderableHolder.getInstance().tup;
-		tile[15].collision = true;
-		
-		tile[16] = new Tile();
-		tile[16].image = RenderableHolder.getInstance().tdown;
-		tile[16].collision = true;
+		for (int i = 0 ; i < fileNames.size() ; i++) {
+			
+			String fileName;
+			boolean collision;
+			
+			// Get a file name
+			fileName = fileNames.get(i);
+			
+			// Get a collision status
+			if (collisionStatus.get(i).equals("true")) {
+				collision = true;
+			} else {
+				collision = false;
+			}
+			
+			setUp(i, fileName , collision);
+		}
+	}
+	
+	public void setUp(int index, String imageName, boolean collision) {
+		try {
+			tile[index] = new Tile();
+			tile[index].image = new Image(ClassLoader.getSystemResource("tiles/"+imageName).toString());
+			tile[index].collision = collision;
+		} catch (Exception e) {
+			System.out.println("Load Tiles Error");
+		}
 	}
 	
 	public void draw(GraphicsContext gc) {
@@ -143,16 +146,13 @@ public class TileManager {
 			while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
 	
 				String line =  br.readLine();
-				
+
 				while (col < gp.maxWorldCol) {
-					
 					String numbers[] = line.split(" ");
 					
 					int num = Integer.parseInt(numbers[col]);
-					
 					mapTileNum[col][row] = num;
 					col++;
-					
 				}
 				
 				if (col == gp.maxWorldCol) {

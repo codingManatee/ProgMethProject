@@ -54,8 +54,8 @@ public class Player extends Entity{
 	
 	public void setDefaultValues() {
 		
-		worldX = gp.getTileSize() * 11;
-		worldY = gp.getTileSize() * 54;
+		worldX = gp.getTileSize() * 6;
+		worldY = gp.getTileSize() * 4;
 		
 	}
 
@@ -87,7 +87,7 @@ public class Player extends Entity{
 			speed = 3;
 		}
 		
-		if (!(collisionOnLeft||collisionOnRight||collisionOnTop||collisionOnBottom)) {
+		if (!(collisionOnLeft||collisionOnRight||collisionOnTop||collisionOnBottom) && (speed < 15)) {
 			speed += 0.1;
 		}
 		

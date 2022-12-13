@@ -37,10 +37,10 @@ public class GamePanel extends Canvas{
 	final int screenHeight = tileSize * maxScreenRow; //576 pixels
 	
 	// WORLD SETTING
-	public final int maxWorldCol = 64;
-	public final int maxWorldRow = 64;
-	public final int worldWidth = maxWorldCol * tileSize;
-	public final int worldHeight = maxWorldRow * tileSize; 
+	public int maxWorldCol;
+	public int maxWorldRow;
+//	public final int worldWidth = maxWorldCol * tileSize;
+//	public final int worldHeight = maxWorldRow * tileSize; 
 	
 	// PLAYER AND OBJECT
 	Player player = new Player(this);
