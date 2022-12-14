@@ -18,6 +18,5 @@ public class Bit extends SuperObject{
 	@Override
 	public void interact(Player player) {
 		// TODO Auto-generated method stub
-		System.out.println("HOOT");
 	}
 }

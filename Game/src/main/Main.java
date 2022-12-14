@@ -24,10 +24,10 @@ public class Main extends Application{
         stage.setScene(scene);
         stage.setTitle("Adventure Time!");
         
+        
         HomePage homepage=new HomePage();
         root.getChildren().add(homepage);
-        //gamePanel.requestFocus();
-    
+        
         stage.show();
     }
 }

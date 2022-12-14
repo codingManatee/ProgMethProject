@@ -10,8 +10,7 @@ import tile.TileManager;
 public class GameLogic {
 	private List<Entity> gameObjectContainer;
 	GamePanel gp;
-	public int gameState = 0;
-	
+
 	public GameLogic(GamePanel gp) {
 		this.gp = gp;
 		this.gameObjectContainer = new ArrayList<Entity>();

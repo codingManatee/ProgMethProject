@@ -7,7 +7,7 @@ import logic.Player;
 public class Door extends SuperObject{
 	public Door() {
 		this.name = "Door";
-		this.solidArea = new Rectangle(0,0,64,64);
+		this.solidArea = new Rectangle(-5,-5,74,74);
 		collision = true;
 		
 		try {

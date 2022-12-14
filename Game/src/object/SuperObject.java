@@ -1,5 +1,7 @@
 package object;
 
+import java.util.Timer;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
@@ -12,6 +14,7 @@ public abstract class SuperObject {
 	public String name;
 	public boolean collision = false;
 	public int worldX,worldY;
+	long startTime = System.nanoTime();
 	
 	Sound sound = new Sound();
 

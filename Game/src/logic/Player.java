@@ -1,7 +1,6 @@
 package logic;
 
 import input.InputUtility;
-import object.Lever;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
@@ -16,7 +15,7 @@ public class Player extends Entity{
 	
 	GamePanel gp;
 	
-	private double speed = 1;
+	private double speed = 3;
 	private String direction;
 	private String faceDirection = "right";
 	
@@ -86,7 +85,7 @@ public class Player extends Entity{
 			collisionOnTop = false;
 			collisionOnBottom = false;
 			
-			speed = 1;
+			speed = 3;
 		}
 		
 		if (!(collisionOnLeft||collisionOnRight||collisionOnTop||collisionOnBottom) && (speed < 15)) {
@@ -151,13 +150,6 @@ public class Player extends Entity{
 				gp.getSuperObject()[i].interact(this);
 				gp.getSuperObject()[i] = null;
 				break;
-			case "bottomLeft":
-				if (direction == "left") {					
-					direction = "up";
-				} else if (direction == "down") {
-					direction = "right";
-				}
-				break;
 			case "Key":
 				gp.getSuperObject()[i].interact(this);
 				gp.getSuperObject()[i] = null;
@@ -170,9 +162,6 @@ public class Player extends Entity{
 					gp.playSE(2);
 				}
 				break;
-			case "Lever":
-				gp.getSuperObject()[i].interact(this);
-				break;
 			case "Coin":
 				gp.getSuperObject()[i].interact(this);
 				gp.playSE(1);
@@ -181,7 +170,13 @@ public class Player extends Entity{
 			case "Fire":
 				gp.getSuperObject()[i].interact(this);
 				break;
-			case "TrapUp":
+			case "Trap":
+				gp.getSuperObject()[i].interact(this);
+				break;
+			case "Spike":
+				gp.getSuperObject()[i].interact(this);
+				break;
+			case "EndGame":
 				gp.getSuperObject()[i].interact(this);
 				break;
 			}

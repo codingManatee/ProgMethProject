@@ -86,28 +86,6 @@ public class GamePanel extends Canvas{
 				InputUtility.mouseLeftRelease();
 		});
 
-	
-		this.setOnMouseEntered((MouseEvent event) -> {
-			InputUtility.mouseOnScreen = true;
-		});
-
-		this.setOnMouseExited((MouseEvent event) -> {
-			InputUtility.mouseOnScreen = false;
-		});
-
-		this.setOnMouseMoved((MouseEvent event) -> {
-			if (InputUtility.mouseOnScreen) {
-				InputUtility.mouseX = event.getX();
-				InputUtility.mouseY = event.getY();
-			}
-		});
-
-		this.setOnMouseDragged((MouseEvent event) -> {
-			if (InputUtility.mouseOnScreen) {
-				InputUtility.mouseX = event.getX();
-				InputUtility.mouseY = event.getY();
-			}
-		});
 	}
 	
 	// CANVAS PAINTER

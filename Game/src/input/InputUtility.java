@@ -6,7 +6,6 @@ import javafx.scene.input.KeyCode;
 
 public class InputUtility {
 
-	public static double mouseX,mouseY;
 	public static boolean mouseOnScreen = true;
 	private static boolean isLeftDown = false;
 	private static boolean isLeftClickedLastTick = false;

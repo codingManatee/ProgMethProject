@@ -1,6 +1,6 @@
 Bit
 11 85
-Bit
+Coin
 12 85
 Bit
 14 85
@@ -24,3 +24,287 @@ Bit
 11 83
 Bit
 11 84
+Bit
+11 81
+Bit
+11 80
+Bit
+11 79
+Bit
+12 79
+Bit
+13 79
+Bit
+13 80
+Bit
+14 80
+Bit
+15 80
+Bit
+16 80
+Bit
+17 80
+Bit
+17 81
+Bit
+17 82
+Bit
+17 83
+Bit
+17 84
+Coin
+18 84
+Coin
+19 84
+Coin
+20 84
+Coin
+21 84
+Coin
+22 84
+Bit
+23 84
+Bit
+23 83
+Bit
+23 82
+Bit
+23 81
+Bit
+23 80
+Bit
+22 80
+Bit
+21 80
+Bit
+20 80
+Bit
+19 80
+Bit
+19 81
+Bit
+19 82
+Bit
+20 82
+Bit
+21 82
+Bit
+21 81
+Bit
+21 79
+Bit
+21 78
+Bit
+20 78
+Bit
+19 78
+Bit
+19 77
+Bit
+19 76
+Bit
+19 75
+Bit
+18 75
+Coin
+17 75
+Bit
+16 75
+Bit
+15 75
+Bit
+15 74
+Bit
+15 73
+Bit
+15 72
+Bit
+16 72
+Bit
+17 72
+Bit
+18 72
+Key
+18 73
+Bit
+18 74
+Bit
+18 71
+Bit
+18 72
+Bit
+18 70
+Bit
+19 70
+Bit
+20 70
+Bit
+21 70
+Bit
+21 69
+Bit
+21 68
+Coin
+21 67
+Bit
+20 67
+Bit
+19 67
+Bit
+18 67
+Bit
+17 67
+Bit
+16 67
+Bit
+16 66
+Bit
+16 65
+Bit
+16 64
+Bit
+17 64
+Bit
+18 64
+Bit
+19 64
+Bit
+19 63
+Bit
+19 62
+Bit
+18 62
+Bit
+17 62
+Bit
+16 62
+Bit
+15 62
+Bit
+14 62
+Bit
+14 63
+Bit
+14 64
+Bit
+14 65
+Bit
+13 65
+Bit
+12 65
+Bit
+11 65
+Bit
+11 64
+Bit
+11 63
+Bit
+11 62
+Bit
+11 61
+Bit
+11 60
+Bit
+12 60
+Bit
+13 60
+Bit
+14 60
+Bit
+15 60
+Bit
+15 61
+Bit
+15 59
+Coin
+15 58
+Trap,TopRight
+12 70
+Trap,Right
+12 71
+Trap,Right
+12 72
+Trap,Right
+12 73
+Trap,Right
+12 74
+Trap,Right
+12 75
+Trap,Up
+11 70
+Trap,Right
+10 69
+Trap,Right
+10 68
+Trap,Right
+10 67
+Trap,Right
+10 66
+Trap,Right
+10 64
+Trap,Right
+10 63
+Trap,Right
+10 62
+Trap,Right
+10 61
+Trap,Right
+10 60
+Trap,Left
+24 75
+Trap,Left
+24 74
+Trap,Left
+24 73
+Trap,Left
+24 72
+Trap,Left
+24 71
+Trap,Left
+24 70
+Trap,Left
+24 69
+Trap,Left
+24 68
+Trap,Left
+24 67
+Trap,Left
+24 66
+Trap,Left
+24 65
+Trap,Left
+24 64
+Trap,Left
+24 63
+Trap,Left
+24 62
+Trap,Left
+24 61
+Trap,Left
+24 60
+DeadBox
+20 81
+Door
+16 62
+Spike,Up
+15 85
+Spike,Up
+20 80
+Spike,Right
+21 81
+Spike,Left
+19 81
+Spike,Bottom
+20 82
+DeadBox
+22 70
+DeadBox
+14 66
+Spike,Left
+21 70
+Spike,Up
+14 65
+EndGame
+15 57
+Fire
+20 63

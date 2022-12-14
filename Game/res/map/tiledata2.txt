@@ -1,7 +1,0 @@
-000.gif
-true
-002.gif
-true
-005.gif
-true
-

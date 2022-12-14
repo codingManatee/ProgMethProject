@@ -29,7 +29,7 @@ public class Sound {
 	}
 	
 	public void play() {
-		clip.setVolume(1);
+		clip.setVolume(0.05);
 		clip.play();
 	}
 	

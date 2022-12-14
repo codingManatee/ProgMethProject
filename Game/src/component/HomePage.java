@@ -1,5 +1,8 @@
 package component;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import input.InputUtility;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -96,7 +99,6 @@ public class HomePage extends StackPane {
 	public void newgameButtonHandler() {
 		GamePanel gamePanel = new GamePanel();
         GameLogic logic = new GameLogic(gamePanel);
-
 		this.setVisible(true);
 		this.getChildren().clear();
 		this.getChildren().add(gamePanel);
@@ -104,7 +106,6 @@ public class HomePage extends StackPane {
 		gamePanel.requestFocus();
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
-
 				gamePanel.paintComponent();
 				logic.logicUpdate();
 				RenderableHolder.getInstance().update();
