@@ -31,10 +31,10 @@ public class GamePanel extends Canvas{
 	final int scale = 1;
 	
 	final int tileSize = originalTileSize * scale; // 64x64 tile
-	final int maxScreenCol = 16;
-	final int maxScreenRow = 9;
-	final int screenWidth = tileSize * maxScreenCol; // 1024 pixels
-	final int screenHeight = tileSize * maxScreenRow; //576 pixels
+	final int maxScreenCol = 21;
+	final int maxScreenRow = 13;
+	final int screenWidth = tileSize * maxScreenCol; // 1344 pixels
+	final int screenHeight = tileSize * maxScreenRow; //960 pixels
 	
 	// WORLD SETTING
 	public int maxWorldCol;
@@ -62,7 +62,7 @@ public class GamePanel extends Canvas{
 	public void setUpGame() {
 		
 		aSetter.setObject();
-		playMusic(0);
+		//playMusic(0);
 	}
 
 	
@@ -149,17 +149,14 @@ public class GamePanel extends Canvas{
 	
 	// SOUND PLAYER
 	public void playMusic(int i) {
-		
 		sound.setFile(i);
 		sound.play();
 		sound.loop();
 	}
 	public void stopMusic() {
-		
-		sound.stop();
+		if (sound.isPlaying()) sound.stop();
 	}
 	public void playSE(int i) {
-		
 		sound.setFile(i);
 		sound.play();
 	}

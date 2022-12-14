@@ -19,6 +19,9 @@ public class Sound {
 		} catch (Exception e) {
 			System.out.println("Load Sound Fail!");
 		}
+		
+		// SET DEFAULT SOUND
+		clip = soundURL.get(0);
 	}
 	
 	public void setFile(int i ) {
@@ -26,7 +29,7 @@ public class Sound {
 	}
 	
 	public void play() {
-		clip.setVolume(0.05);
+		clip.setVolume(1);
 		clip.play();
 	}
 	
@@ -36,5 +39,9 @@ public class Sound {
 	
 	public void stop() {
 		clip.stop();
+	}
+	
+	public boolean isPlaying() {
+		return clip.getCycleCount() != 0; 
 	}
 }
