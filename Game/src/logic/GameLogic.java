@@ -16,14 +16,9 @@ public class GameLogic {
 		this.gameObjectContainer = new ArrayList<Entity>();
 		
 		gp.setUpGame();
-		addNewObject(gp.getPlayer());			
+		
+	}
 
-	}
-	
-	protected void addNewObject(Entity entity) {
-		gameObjectContainer.add(entity);
-		RenderableHolder.getInstance().add(entity);
-	}
 	
 	public void logicUpdate() {
 		gp.getPlayer().update();

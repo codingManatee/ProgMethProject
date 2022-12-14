@@ -9,7 +9,7 @@ import logic.Player;
 import logic.Sound;
 import main.GamePanel;
 
-public abstract class SuperObject {
+public class SuperObject implements Interactable{
 	public Image image;
 	public String name;
 	public boolean collision = false;
@@ -23,6 +23,10 @@ public abstract class SuperObject {
 	public int solidAreaDefaultX = 0;
 	public int solidAreaDefaultY = 0;
 
+	public SuperObject() {
+		
+	}
+	
 	public void draw(GraphicsContext gc, GamePanel gp) {
 		
 		int screenX = worldX - gp.getPlayer().worldX + gp.getPlayer().screenX;
@@ -36,7 +40,10 @@ public abstract class SuperObject {
 			gc.drawImage(image, screenX, screenY , gp.getTileSize() , gp.getTileSize() );
 		}
 	}
-	
-	public abstract void interact(Player player);
-	
+
+	@Override
+	public void interact(Player player) {
+		
+	}
+
 }

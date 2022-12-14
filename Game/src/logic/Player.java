@@ -13,27 +13,34 @@ import sharedObject.RenderableHolder;
 
 public class Player extends Entity{
 	
+	// GAME PANEL
 	GamePanel gp;
 	
-	private double speed = 3;
+	// PRIVATE SETTING
+	private double speed;
 	private String direction;
-	private String faceDirection = "right";
+	private String faceDirection;
 	
+	// ANIMATION PLAYER
 	private int spriteCounter = 0;
 	private int spriteNum = 1;
 	
 	public final int screenX;
 	public final int screenY;
 	
+	// IN GAME SCORE
 	public int curScore;
 	public int hasKey;
 	
+	// PLAYER STATUS
 	public boolean dead = false;
 	
 	public Player(GamePanel gp) {
 
 		this.gp = gp;
 		this.direction = "down";	
+		this.faceDirection = "right";
+		this.speed = 3;
 		setDefaultValues();
 		screenX = gp.getScreenWidth()/2 - gp.getTileSize()/2;
 		screenY = gp.getScreenHeight()/2 - gp.getTileSize()/2;
@@ -55,6 +62,7 @@ public class Player extends Entity{
 	
 	public void setDefaultValues() {
 		
+		// SET PLAYER'S ORIGIN
 		worldX = gp.getTileSize() * 13;
 		worldY = gp.getTileSize() * 85;
 		
@@ -64,18 +72,12 @@ public class Player extends Entity{
 		if ((InputUtility.getKeyPressed(KeyCode.W)||InputUtility.getKeyPressed(KeyCode.S)
 				||InputUtility.getKeyPressed(KeyCode.A)||InputUtility.getKeyPressed(KeyCode.D))
 				&& (collisionOnLeft||collisionOnRight||collisionOnTop||collisionOnBottom)) {
-			if (InputUtility.getKeyPressed(KeyCode.W)) {
-				direction = "up";
-			} else if (InputUtility.getKeyPressed(KeyCode.S)){
-				direction = "down";
-			} else if (InputUtility.getKeyPressed(KeyCode.A)) {
-				direction = "left";
-				faceDirection = "left";
-			} else if (InputUtility.getKeyPressed(KeyCode.D)) {
-				direction = "right";
-				faceDirection = "right";
-			}
+			if (InputUtility.getKeyPressed(KeyCode.W)) { direction = "up"; } 
+			else if (InputUtility.getKeyPressed(KeyCode.S)) { direction = "down"; }
+			else if (InputUtility.getKeyPressed(KeyCode.A)) { direction = "left"; faceDirection = "left"; }
+			else if (InputUtility.getKeyPressed(KeyCode.D)) { direction = "right"; faceDirection = "right"; }
 	
+			// FOR FUTURE IMPLEMENT
 			if (InputUtility.isLeftClickTriggered()) {
 			}
 			
@@ -84,10 +86,10 @@ public class Player extends Entity{
 			collisionOnRight = false;
 			collisionOnTop = false;
 			collisionOnBottom = false;
-			
 			speed = 3;
 		}
 		
+		// FLYING SPEED
 		if (!(collisionOnLeft||collisionOnRight||collisionOnTop||collisionOnBottom) && (speed < 15)) {
 			speed += 0.1;
 		}
@@ -100,30 +102,14 @@ public class Player extends Entity{
 		
 		// IF COLLISION IS FALSE, PLAYER CAN MOVE
 		switch(direction) {
-		case "up": 
-			if (!collisionOnTop) 
-				this.worldY -= speed; 
-			break;
-		case "down": 
-			if (!collisionOnBottom) {
-				this.worldY += speed; 				
-			}
-			break;
-		case "left": 
-			if (!collisionOnLeft) {
-				this.worldX -= speed; 				
-			}
-			break;
-		case "right": 
-			if (!collisionOnRight) {				
-				this.worldX += speed;
-			}
-			break;
+		case "up": if (!collisionOnTop) this.worldY -= speed; break;
+		case "down": if (!collisionOnBottom) this.worldY += speed; break;
+		case "left": if (!collisionOnLeft) this.worldX -= speed; break;
+		case "right": if (!collisionOnRight) this.worldX += speed; break;
 		}
 		
-		
+		// ANIMATION OF PLAYER
 		spriteCounter++;
-		
 		if (spriteCounter > 12) {
 			if (spriteNum == 1) {
 				spriteNum = 2;
@@ -138,12 +124,15 @@ public class Player extends Entity{
 			}
 			spriteCounter = 0;
 		}
+		
 	}
 	
+	// OBJECT CHECKER
 	public void pickUpObject(int i) {
 		if (i != 999) {
 			String objectName = gp.getSuperObject()[i].name;
 			
+			// INTERACTABLE
 			switch(objectName) {
 			case "Bit":
 				curScore++;
@@ -183,7 +172,7 @@ public class Player extends Entity{
 		}
 	}
 
-	@Override
+	
 	public void draw(GraphicsContext gc) {
 		Image image = null;
 		switch(faceDirection) {
@@ -216,6 +205,7 @@ public class Player extends Entity{
 		}
 		gc.drawImage(image, screenX, screenY);
 	}
+	
 	
 	// GETTER AND SETTER
 	public String getDirection() {

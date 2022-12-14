@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.GamePanel;
-import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
 public class TileManager {

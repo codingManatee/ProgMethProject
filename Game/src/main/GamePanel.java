@@ -6,7 +6,6 @@ import logic.CollisionChecker;
 import logic.Player;
 import logic.Sound;
 import object.SuperObject;
-import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 import tile.TileManager;
 import javafx.geometry.Insets;
@@ -106,13 +105,7 @@ public class GamePanel extends Canvas{
 			Font font = new Font(40);
 			gc.setFont(font);
 			gc.fillText(Integer.toString(player.curScore),screenWidth - 40 ,50);
-			
-			for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
-				// PLAYER
-				if (entity.isVisible() && !entity.isDestroyed()) {
-					entity.draw(gc);
-				}
-			}
+			player.draw(gc);
 		} else {
 			gc.setFill(Color.BLACK);
 			gc.fillRect(0, 0, screenWidth, screenHeight);

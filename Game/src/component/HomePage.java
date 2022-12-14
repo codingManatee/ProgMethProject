@@ -108,7 +108,7 @@ public class HomePage extends StackPane {
 			public void handle(long now) {
 				gamePanel.paintComponent();
 				logic.logicUpdate();
-				RenderableHolder.getInstance().update();
+				//RenderableHolder.getInstance().update();
 				InputUtility.updateInputState();
 			}
 		};

@@ -1,9 +1,8 @@
 package logic;
 
 import javafx.scene.shape.Rectangle;
-import sharedObject.IRenderable;
 
-public abstract class Entity implements IRenderable{
+public abstract class Entity{
 
 	public int worldX , worldY;
 	protected int z;
@@ -13,25 +12,8 @@ public abstract class Entity implements IRenderable{
 	public int pickRangeDefaultX, pickRangeDefaultY;
 	public boolean collisionOnLeft,collisionOnRight,collisionOnTop,collisionOnBottom;
 	
-
-	
 	protected Entity(){
-		visible = true;
-		destroyed = false;
-	}
-	
-	@Override
-	public boolean isDestroyed(){
-		return destroyed;
-	}
-	
-	@Override
-	public boolean isVisible(){
-		return visible;
-	}
 
-	@Override
-	public int getZ(){
-		return z;
 	}
+	
 }
