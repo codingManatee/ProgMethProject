@@ -16,7 +16,7 @@ public class Player extends Entity{
 	
 	GamePanel gp;
 	
-	private double speed = 3;
+	private double speed = 1;
 	private String direction;
 	private String faceDirection = "right";
 	
@@ -40,7 +40,8 @@ public class Player extends Entity{
 		screenY = gp.getScreenHeight()/2 - gp.getTileSize()/2;
 		
 		// HITBOX
-		solidArea = new Rectangle(8,8,48,48);
+		//solidArea = new Rectangle(8,8,48,48);
+		solidArea = new Rectangle(4,4,52,52);
 		
 		// PICKUP RANGE
 		pickRange = new Rectangle(8,8,48,48);
@@ -55,8 +56,8 @@ public class Player extends Entity{
 	
 	public void setDefaultValues() {
 		
-		worldX = gp.getTileSize() * 11;
-		worldY = gp.getTileSize() * 91;
+		worldX = gp.getTileSize() * 13;
+		worldY = gp.getTileSize() * 85;
 		
 	}
 
@@ -85,7 +86,7 @@ public class Player extends Entity{
 			collisionOnTop = false;
 			collisionOnBottom = false;
 			
-			speed = 3;
+			speed = 1;
 		}
 		
 		if (!(collisionOnLeft||collisionOnRight||collisionOnTop||collisionOnBottom) && (speed < 15)) {
@@ -178,6 +179,9 @@ public class Player extends Entity{
 				gp.getSuperObject()[i] = null;
 				break;
 			case "Fire":
+				gp.getSuperObject()[i].interact(this);
+				break;
+			case "TrapUp":
 				gp.getSuperObject()[i].interact(this);
 				break;
 			}

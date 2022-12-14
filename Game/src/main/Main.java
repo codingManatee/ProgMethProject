@@ -1,5 +1,7 @@
+
 package main;
 
+import component.HomePage;
 import input.InputUtility;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -12,32 +14,20 @@ import logic.GameLogic;
 import sharedObject.RenderableHolder;
 
 public class Main extends Application{
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
-	
-	public void start(Stage stage) {
-		StackPane root = new StackPane();
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle("Adventure Time!");
-		
-		GamePanel gamePanel = new GamePanel();
-		GameLogic logic = new GameLogic(gamePanel);
-		root.getChildren().add(gamePanel);
-		gamePanel.requestFocus();
-	
-		stage.show();
-
-		AnimationTimer animation = new AnimationTimer() {
-			public void handle(long now) {
-				gamePanel.paintComponent();
-				logic.logicUpdate();
-				RenderableHolder.getInstance().update();
-				InputUtility.updateInputState();
-			}
-		};
-		animation.start();
-	}
+    public static void main(String[] args) {
+        launch(args);
+    }
+    
+    public void start(Stage stage) {
+        StackPane root = new StackPane();
+        Scene scene = new Scene(root, 1344, 832);
+        stage.setScene(scene);
+        stage.setTitle("Adventure Time!");
+        
+        HomePage homepage=new HomePage();
+        root.getChildren().add(homepage);
+        //gamePanel.requestFocus();
+    
+        stage.show();
+    }
 }

@@ -9,7 +9,7 @@ public class Bit extends SuperObject{
 		
 		this.name = "Bit";
 		try {
-			image = new Image(ClassLoader.getSystemResource("objects/star.png").toString());
+			image = new Image(ClassLoader.getSystemResource("objects/bit.gif").toString());
 		} catch (Exception e) {
 			System.out.println("Load Bit's image Fail");
 		}

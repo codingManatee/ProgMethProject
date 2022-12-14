@@ -25,11 +25,11 @@ public class TileManager {
 		this.gp = gp;
 		
 		// CHANGE YOUR MAP NAME HERE
-		this.mapName = "map/finalMap.txt";
+		this.mapName = "map/Map01.txt";
 		
 		
 		// READ TILE DATA FILE // ALSO CHANGE WITH MAP
-		InputStream is = ClassLoader.getSystemResourceAsStream("map/tiledata.txt".toString());
+		InputStream is = ClassLoader.getSystemResourceAsStream("map/tiledata01.txt".toString());
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));			
 	
 		

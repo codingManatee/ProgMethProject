@@ -62,7 +62,7 @@ public class GamePanel extends Canvas{
 	public void setUpGame() {
 		
 		aSetter.setObject();
-		//playMusic(0);
+		playMusic(0);
 	}
 
 	
@@ -142,7 +142,7 @@ public class GamePanel extends Canvas{
 			gc.setFill(Color.WHITE);
 			Font font = new Font(100);
 			gc.setFont(font);
-			gc.fillText("GAME OVER",screenWidth-775,screenHeight/2);
+			gc.fillText("GAME OVER",screenWidth/3-25,screenHeight/2);
 		}
 	}
 	
