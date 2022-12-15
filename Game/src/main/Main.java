@@ -22,7 +22,7 @@ public class Main extends Application{
         StackPane root = new StackPane();
         Scene scene = new Scene(root, 1344, 832);
         stage.setScene(scene);
-        stage.setTitle("Adventure Time!");
+        stage.setTitle("Get Out!");
         
         
         HomePage homepage = new HomePage();
