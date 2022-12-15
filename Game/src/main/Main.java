@@ -6,11 +6,13 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import logic.GameLogic;
 import sharedObject.RenderableHolder;
 
+<<<<<<< Updated upstream
 public class Main extends Application{
 	public static void main(String[] args) {
 		launch(args);
@@ -94,4 +96,23 @@ public class Main extends Application {
         };
         animation.start();
     }
+=======
+public class Main extends Application {
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+	public void start(Stage stage) {
+		StackPane root = new StackPane();
+		Scene scene = new Scene(root, 1344, 832);
+		stage.setScene(scene);
+		stage.setTitle("GET OUT!");
+		stage.getIcons().add(new Image(ClassLoader.getSystemResource("player/right3.png").toString()));
+
+		HomePage homepage = new HomePage();
+		root.getChildren().add(homepage);
+
+		stage.show();
+	}
+>>>>>>> Stashed changes
 }

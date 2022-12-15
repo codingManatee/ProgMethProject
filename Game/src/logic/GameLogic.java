@@ -21,7 +21,11 @@ public class GameLogic {
 		gameObjectContainer.add(entity);
 		RenderableHolder.getInstance().add(entity);
 	}
+<<<<<<< Updated upstream
 	
+=======
+
+>>>>>>> Stashed changes
 	public void logicUpdate() {
 		player.update();
 	}

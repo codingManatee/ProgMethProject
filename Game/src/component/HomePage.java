@@ -64,9 +64,14 @@ public class HomePage extends StackPane {
 		initializeTutorialButton();
 		initializeQuitButton();
 
+<<<<<<< Updated upstream
 		allButton.setSpacing(50);
 		allButton.setAlignment(Pos.CENTER);
 		allButton.getChildren().addAll(newgameButton, tutorialButton, quitButton);
+=======
+		String getoutURL = ClassLoader.getSystemResource("pagegui/getout.gif").toString();
+		ImageView gamename = new ImageView(new Image(getoutURL));
+>>>>>>> Stashed changes
 
 		this.getChildren().addAll(allButton, soundButton);
 	}
@@ -83,10 +88,17 @@ public class HomePage extends StackPane {
 		String startsoundURL = ClassLoader.getSystemResource("test/startsound.mp3").toString();
 		AudioClip startsound = new AudioClip(startsoundURL);
 
+<<<<<<< Updated upstream
 		newgameButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				sound.stop();
+=======
+		this.setOnKeyPressed((KeyEvent event) -> {
+			String startsoundURL = ClassLoader.getSystemResource("sound/startsound.mp3").toString();
+			AudioClip startsound = new AudioClip(startsoundURL);
+			if (event.getCode() == KeyCode.F) {
+>>>>>>> Stashed changes
 				startsound.play();
 				newgameButtonHandler();
 			}
@@ -120,11 +132,11 @@ public class HomePage extends StackPane {
 		tutorialButton.setMinSize(300, 55);
 		tutorialButton.setMaxSize(300, 55);
 
-		tutorialURL = ClassLoader.getSystemResource("test/tutorial.png").toString();
+		tutorialURL = ClassLoader.getSystemResource("pagegui/tutorial.png").toString();
 		ImageView tutorial = new ImageView(new Image(tutorialURL));
 		tutorialButton.setGraphic(tutorial);
 
-		String buttonsoundURL = ClassLoader.getSystemResource("test/buttonsound.mp3").toString();
+		String buttonsoundURL = ClassLoader.getSystemResource("sound/buttonsound.mp3").toString();
 		AudioClip buttonsound = new AudioClip(buttonsoundURL);
 
 		tutorialButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -149,11 +161,11 @@ public class HomePage extends StackPane {
 		quitButton.setMinSize(300, 55);
 		quitButton.setMaxSize(300, 55);
 
-		quitURL = ClassLoader.getSystemResource("test/quit.png").toString();
+		quitURL = ClassLoader.getSystemResource("pagegui/quit.png").toString();
 		ImageView quit = new ImageView(new Image(quitURL));
 		quitButton.setGraphic(quit);
 
-		String buttonsoundURL = ClassLoader.getSystemResource("test/buttonsound.mp3").toString();
+		String buttonsoundURL = ClassLoader.getSystemResource("sound/buttonsound.mp3").toString();
 		AudioClip buttonsound = new AudioClip(buttonsoundURL);
 
 		quitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -177,7 +189,7 @@ public class HomePage extends StackPane {
 				Platform.exit();
 				// System.exit(0);
 			} else {
-				String buttonsoundURL = ClassLoader.getSystemResource("test/buttonsound.mp3").toString();
+				String buttonsoundURL = ClassLoader.getSystemResource("sound/buttonsound.mp3").toString();
 				AudioClip buttonsound = new AudioClip(buttonsoundURL);
 				buttonsound.play();
 			}
@@ -189,15 +201,15 @@ public class HomePage extends StackPane {
 		soundButton.setMinSize(55, 55);
 		soundButton.setMaxSize(55, 55);
 
-		unmuteURL = ClassLoader.getSystemResource("test/unmute.png").toString();
+		unmuteURL = ClassLoader.getSystemResource("pagegui/unmute.png").toString();
 		unmute = new ImageView(new Image(unmuteURL));
 
-		muteURL = ClassLoader.getSystemResource("test/mute.png").toString();
+		muteURL = ClassLoader.getSystemResource("pagegui/mute.png").toString();
 		mute = new ImageView(new Image(muteURL));
 
 		soundButton.setGraphic(unmute);
 
-		soundURL = ClassLoader.getSystemResource("test/titlesong.wav").toString();
+		soundURL = ClassLoader.getSystemResource("sound/titlesong.wav").toString();
 		sound = new AudioClip(soundURL);
 		sound.setVolume(0.2);
 		sound.play();

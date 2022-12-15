@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+<<<<<<< Updated upstream
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 import logic.Player;
@@ -18,6 +19,16 @@ public class RenderableHolder {
 	public static Image up,down,left,right,close,grass,water,sand,brick,tree;
 	
 	static {
+=======
+public class RenderableHolder {
+	private static final RenderableHolder instance = new RenderableHolder();
+
+	// PLAYER ANIMATION
+	public static Image up, down, left1, left2, left3, left4, left5, left6;
+	public static Image right1, right2, right3, right4, right5, right6;
+
+	public RenderableHolder() {
+>>>>>>> Stashed changes
 		loadResource();
 	}
 

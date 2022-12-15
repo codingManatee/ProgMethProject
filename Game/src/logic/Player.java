@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import sharedObject.RenderableHolder;
 
+<<<<<<< Updated upstream
 public class Player extends CollidableEntity{
 	private static final int speed = 3;
 	private String direction;
@@ -73,10 +74,149 @@ public class Player extends CollidableEntity{
 					spriteNum = 1;
 				}
 				spriteCounter = 0;
+=======
+public class Player extends Entity {
+
+	// GAME PANEL
+	GamePanel gp;
+
+	// PRIVATE SETTING
+	private double speed;
+	private String direction;
+	private String faceDirection;
+
+	// ANIMATION PLAYER
+	private int spriteCounter = 0;
+	private int spriteNum = 1;
+
+	public final int screenX;
+	public final int screenY;
+
+	// IN GAME SCORE
+	public int curScore;
+	public int hasKey;
+
+	// PLAYER STATUS
+	public int gameState;
+
+	public Player(GamePanel gp) {
+
+		this.gp = gp;
+		this.direction = "down";
+		this.faceDirection = "right";
+		this.speed = 3;
+		setSpawn(13, 85);
+		setDefaultValues();
+		screenX = gp.getScreenWidth() / 2 - gp.getTileSize() / 2;
+		screenY = gp.getScreenHeight() / 2 - gp.getTileSize() / 2;
+
+		// HITBOX
+		solidArea = new Rectangle(4, 4, 52, 52);
+
+		// PICKUP RANGE
+		pickRange = new Rectangle(8, 8, 48, 48);
+
+		solidAreaDefaultX = (int) solidArea.getX();
+		solidAreaDefaultY = (int) solidArea.getY();
+
+		pickRangeDefaultX = (int) pickRange.getX();
+		pickRangeDefaultY = (int) pickRange.getY();
+	}
+
+	// SET PLAYER'S ORIGIN
+	public void setSpawn(int x, int y) {
+		worldX = gp.getTileSize() * x;
+		worldY = gp.getTileSize() * y;
+	}
+
+	public void setDefaultValues() {
+		collisionOnLeft = false;
+		collisionOnRight = false;
+		collisionOnTop = false;
+		collisionOnBottom = false;
+		speed = 3;
+	}
+
+	public void update() {
+		if ((InputUtility.getKeyPressed(KeyCode.W) || InputUtility.getKeyPressed(KeyCode.S)
+				|| InputUtility.getKeyPressed(KeyCode.A) || InputUtility.getKeyPressed(KeyCode.D))
+				&& (collisionOnLeft || collisionOnRight || collisionOnTop || collisionOnBottom)) {
+			if (InputUtility.getKeyPressed(KeyCode.W)) {
+				direction = "up";
+			} else if (InputUtility.getKeyPressed(KeyCode.S)) {
+				direction = "down";
+			} else if (InputUtility.getKeyPressed(KeyCode.A)) {
+				direction = "left";
+				faceDirection = "left";
+			} else if (InputUtility.getKeyPressed(KeyCode.D)) {
+				direction = "right";
+				faceDirection = "right";
+			}
+
+			// CHECK TILE COLLISION
+			setDefaultValues();
+		}
+		// FLYING SPEED
+		isFlying();
+
+		// CHECK OBJECT COLLISION
+		gp.getCollisionChecker().checkTile(this);
+		int objIndex = gp.getCollisionChecker().checkObject(this, true);
+		pickUpObject(objIndex);
+
+		// IF COLLISION IS FALSE, PLAYER CAN MOVE
+		move(direction);
+
+		// ANIMATION OF PLAYER
+		animate();
+	}
+
+	public void isFlying() {
+		if (!(collisionOnLeft || collisionOnRight || collisionOnTop || collisionOnBottom) && (speed < 15)) {
+			speed += 0.1;
+		}
+	}
+
+	public void move(String direction) {
+		switch (direction) {
+		case "up":
+			if (!collisionOnTop)
+				this.worldY -= speed;
+			break;
+		case "down":
+			if (!collisionOnBottom)
+				this.worldY += speed;
+			break;
+		case "left":
+			if (!collisionOnLeft)
+				this.worldX -= speed;
+			break;
+		case "right":
+			if (!collisionOnRight)
+				this.worldX += speed;
+			break;
+		}
+	}
+
+	public void animate() {
+		spriteCounter++;
+		if (spriteCounter > 12) {
+			if (spriteNum == 1) {
+				spriteNum = 2;
+			} else if (spriteNum == 2) {
+				spriteNum = 3;
+			} else if (spriteNum == 3) {
+				spriteNum = 4;
+			} else if (spriteNum == 4) {
+				spriteNum = 5;
+			} else if (spriteNum == 5) {
+				spriteNum = 1;
+>>>>>>> Stashed changes
 			}
 		}
 		
 	}
+<<<<<<< Updated upstream
 	
 	@Override
 	public void draw(GraphicsContext gc) {
@@ -99,16 +239,37 @@ public class Player extends CollidableEntity{
 		case "left":
 			if (spriteNum == 1) {
 				image = RenderableHolder.getInstance().left;				
+=======
+
+	// INTERACTION WITH OBJECT
+	public void pickUpObject(int i) {
+		if (i != 999) {
+			gp.getSuperObject()[i].interact(this);
+		}
+	}
+
+	public void draw(GraphicsContext gc) {
+		Image image = null;
+		switch (faceDirection) {
+		case "left":
+			if (spriteNum == 1) {
+				image = RenderableHolder.getInstance().left1;
+>>>>>>> Stashed changes
 			} else if (spriteNum == 2) {
 				image = RenderableHolder.getInstance().close;
 			}
 			break;
 		case "right":
 			if (spriteNum == 1) {
+<<<<<<< Updated upstream
 				image = RenderableHolder.getInstance().right;				
+=======
+				image = RenderableHolder.getInstance().right1;
+>>>>>>> Stashed changes
 			} else if (spriteNum == 2) {
 				image = RenderableHolder.getInstance().close;
 			}
+<<<<<<< Updated upstream
 			break;
 		}
 		gc.drawImage(image, x, y);
@@ -116,6 +277,28 @@ public class Player extends CollidableEntity{
 		//gc.fillRect(x, y, 64, 64);
 		//gc.translate(x, y);
 		//gc.translate(-x, -y);
+=======
+
+		}
+		gc.drawImage(image, screenX, screenY);
+	}
+
+	// GETTER AND SETTER
+	public String getDirection() {
+		return this.direction;
+	}
+
+	public double getSpeed() {
+		return this.speed;
+	}
+
+	public void Win() {
+		this.gameState = 2;
+	}
+
+	public void Dead() {
+		this.gameState = 1;
+>>>>>>> Stashed changes
 	}
 
 }
