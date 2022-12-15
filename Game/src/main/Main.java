@@ -7,6 +7,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
@@ -23,7 +24,7 @@ public class Main extends Application{
         Scene scene = new Scene(root, 1344, 832);
         stage.setScene(scene);
         stage.setTitle("Get Out!");
-        
+        stage.getIcons().add(new Image(ClassLoader.getSystemResource("player/right3.png").toString()));
         
         HomePage homepage = new HomePage();
         root.getChildren().add(homepage);

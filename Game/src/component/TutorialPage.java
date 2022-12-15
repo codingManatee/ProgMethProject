@@ -27,46 +27,53 @@ public class TutorialPage extends StackPane {
         allButton.setLeftAnchor(backButton, 0.0);
         allButton.getChildren().add(backButton);
 
-        backURL = ClassLoader.getSystemResource("test/back.png").toString();
-        descriptionURL = ClassLoader.getSystemResource("test/description.png").toString();
+        backURL = ClassLoader.getSystemResource("pagegui/back.png").toString();
+        descriptionURL = ClassLoader.getSystemResource("pagegui/description.png").toString();
         ImageView description = new ImageView(new Image(descriptionURL));
-        description.setFitHeight(500);
-        description.setFitWidth(500);
+        description.setFitHeight(350);
+        description.setFitWidth(490);
 
         BorderPane borderpane = new BorderPane();
         borderpane.setCenter(description);
 
         VBox page = new VBox();
-        page.getChildren().addAll(borderpane, allButton);
+        StackPane s = new StackPane();
+		s.setMinSize(200, 200);
+		s.setMaxSize(200, 200);
+		StackPane p = new StackPane();
+		p.setMinSize(200, 200);
+		p.setMaxSize(200, 200);
+        page.getChildren().addAll(s,borderpane,p, allButton);
 
         this.getChildren().add(page);
     }
     
-    public void initializeBackButton() {
-        backButton = new Button();
-        backButton.setMinSize(80, 30);
-        backButton.setMaxSize(80, 30);
+	public void initializeBackButton() {
+		backButton = new Button();
+		backButton.setMinSize(175, 40);
+		backButton.setMaxSize(175, 40);
 
-        backURL = ClassLoader.getSystemResource("test/back.png").toString();
-        ImageView back = new ImageView(new Image(backURL));
-        backButton.setGraphic(back);
+		backURL = ClassLoader.getSystemResource("pagegui/goback.png").toString();
+		ImageView back = new ImageView(new Image(backURL));
+		backButton.setGraphic(back);
 
-        String buttonsoundURL = ClassLoader.getSystemResource("test/buttonsound.mp3").toString();
-        AudioClip buttonsound = new AudioClip(buttonsoundURL);
+		String buttonsoundURL = ClassLoader.getSystemResource("sound/buttonsound.mp3").toString();
+		AudioClip buttonsound = new AudioClip(buttonsoundURL);
+		
+		backButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				buttonsound.play();
+				backButtonHandler();
+			}
+		});
+	}
+	
+	public void backButtonHandler() {
+		HomePage homepage = new HomePage();
+		this.setVisible(true);
+		this.getChildren().clear();
+		this.getChildren().add(homepage);
 
-        backButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                buttonsound.play();
-                backButtonHandler();
-            }
-        });
-    }
-
-    public void backButtonHandler() {
-        HomePage homepage = new HomePage();
-        this.setVisible(true);
-        this.getChildren().clear();
-        this.getChildren().add(homepage);
     }
 }

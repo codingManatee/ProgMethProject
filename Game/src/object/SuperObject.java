@@ -28,6 +28,8 @@ public abstract class SuperObject{
 	public boolean visible = true;
 	
 	public SuperObject() {
+		this.image = null;
+		this.name = "default object";
 		soundE = new Sound();
 	}
 	
