@@ -3,7 +3,7 @@ package object;
 import javafx.scene.image.Image;
 import logic.Player;
 
-public class Key extends SuperObject{
+public class Key extends SuperObject implements Pickable{
 	public Key() {
 		this.name = "Key";
 		try {
@@ -16,6 +16,17 @@ public class Key extends SuperObject{
 	@Override
 	public void interact(Player player) {
 		// TODO Auto-generated method stub
+		if (isVisible()) {
+			this.image = null;
+			pick(player);
+		}
+		setVisible(false);
+	}
+
+	@Override
+	public void pick(Player player) {
+		// TODO Auto-generated method stub
 		player.hasKey++;
+		this.playSE(3);
 	}
 }

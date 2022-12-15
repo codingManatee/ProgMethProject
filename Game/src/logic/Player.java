@@ -33,7 +33,7 @@ public class Player extends Entity{
 	public int hasKey;
 	
 	// PLAYER STATUS
-	public boolean dead = false;
+	public int gameState;
 	
 	public Player(GamePanel gp) {
 
@@ -46,7 +46,6 @@ public class Player extends Entity{
 		screenY = gp.getScreenHeight()/2 - gp.getTileSize()/2;
 		
 		// HITBOX
-		//solidArea = new Rectangle(8,8,48,48);
 		solidArea = new Rectangle(4,4,52,52);
 		
 		// PICKUP RANGE
@@ -76,10 +75,9 @@ public class Player extends Entity{
 			else if (InputUtility.getKeyPressed(KeyCode.S)) { direction = "down"; }
 			else if (InputUtility.getKeyPressed(KeyCode.A)) { direction = "left"; faceDirection = "left"; }
 			else if (InputUtility.getKeyPressed(KeyCode.D)) { direction = "right"; faceDirection = "right"; }
-	
-			// FOR FUTURE IMPLEMENT
-			if (InputUtility.isLeftClickTriggered()) {
-			}
+			
+			// IF COLLISION IS FALSE, PLAYER CAN MOVE
+			move(direction);
 			
 			// CHECK TILE COLLISION
 			collisionOnLeft = false;
@@ -89,25 +87,34 @@ public class Player extends Entity{
 			speed = 3;
 		}
 		
-		// FLYING SPEED
-		if (!(collisionOnLeft||collisionOnRight||collisionOnTop||collisionOnBottom) && (speed < 15)) {
-			speed += 0.1;
-		}
-		
+		// IF FLYING, ADD SPEED
+		isFlying();
 		
 		// CHECK OBJECT COLLISION
 		gp.getCollisionChecker().checkTile(this);
 		int objIndex = gp.getCollisionChecker().checkObject(this, true);
 		pickUpObject(objIndex);
 		
-		// IF COLLISION IS FALSE, PLAYER CAN MOVE
+		// ANIMATE THE PLAYER
+		animate();
+	}
+	
+	public void move(String direction) {
 		switch(direction) {
 		case "up": if (!collisionOnTop) this.worldY -= speed; break;
 		case "down": if (!collisionOnBottom) this.worldY += speed; break;
 		case "left": if (!collisionOnLeft) this.worldX -= speed; break;
 		case "right": if (!collisionOnRight) this.worldX += speed; break;
+		}		
+	}
+	
+	public void isFlying() {
+		if (!(collisionOnLeft||collisionOnRight||collisionOnTop||collisionOnBottom) && (speed < 15)) {
+			speed += 0.1;
 		}
-		
+	}
+	
+	public void animate(){
 		// ANIMATION OF PLAYER
 		spriteCounter++;
 		if (spriteCounter > 12) {
@@ -124,51 +131,12 @@ public class Player extends Entity{
 			}
 			spriteCounter = 0;
 		}
-		
 	}
 	
 	// OBJECT CHECKER
 	public void pickUpObject(int i) {
 		if (i != 999) {
-			String objectName = gp.getSuperObject()[i].name;
-			
-			// INTERACTABLE
-			switch(objectName) {
-			case "Bit":
-				curScore++;
-				gp.getSuperObject()[i].interact(this);
-				gp.getSuperObject()[i] = null;
-				break;
-			case "Key":
-				gp.getSuperObject()[i].interact(this);
-				gp.getSuperObject()[i] = null;
-				gp.playSE(3);
-				break;
-			case "Door":
-				if (hasKey > 0 && InputUtility.getKeyPressed(KeyCode.E)) {
-					gp.getSuperObject()[i] = null;
-					hasKey--;
-					gp.playSE(2);
-				}
-				break;
-			case "Coin":
-				gp.getSuperObject()[i].interact(this);
-				gp.playSE(1);
-				gp.getSuperObject()[i] = null;
-				break;
-			case "Fire":
-				gp.getSuperObject()[i].interact(this);
-				break;
-			case "Trap":
-				gp.getSuperObject()[i].interact(this);
-				break;
-			case "Spike":
-				gp.getSuperObject()[i].interact(this);
-				break;
-			case "EndGame":
-				gp.getSuperObject()[i].interact(this);
-				break;
-			}
+			gp.getSuperObject()[i].interact(this);
 		}
 	}
 
@@ -200,8 +168,7 @@ public class Player extends Entity{
 				image = RenderableHolder.getInstance().right4;
 			} else if (spriteNum == 5) {
 				image = RenderableHolder.getInstance().right5;
-			}
-			
+			}		
 		}
 		gc.drawImage(image, screenX, screenY);
 	}
@@ -214,9 +181,11 @@ public class Player extends Entity{
 	public double getSpeed() {
 		return this.speed;
 	}
-
+	public void Win() {
+		this.gameState = 2;
+	}
+	
 	public void Dead() {
-		this.dead = true;
-		gp.stopMusic();
+		this.gameState = 1;
 	}
 }

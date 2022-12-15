@@ -6,7 +6,7 @@ import java.util.TimerTask;
 import javafx.scene.image.Image;
 import logic.Player;
 
-public class Spike extends SuperObject{
+public class Spike extends SuperObject implements Killable{
 	
 	boolean isActive = false;
 	Image active;
@@ -69,7 +69,13 @@ public class Spike extends SuperObject{
 			};
 			time.scheduleAtFixedRate(task, 0, 1000);	
 		} else {			
-			player.Dead();
+			kill(player);
 		}
+	}
+
+	@Override
+	public void kill(Player player) {
+		// TODO Auto-generated method stub
+		player.Dead();
 	}
 }

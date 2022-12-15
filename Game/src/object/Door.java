@@ -19,7 +19,14 @@ public class Door extends SuperObject{
 
 	@Override
 	public void interact(Player player) {
-		// TODO Auto-generated method stub
-
+		if (isVisible()) {
+			if (player.hasKey > 0) {
+				player.hasKey--;
+				this.image = null;
+				setVisible(false);
+				this.collision = false;
+				this.playSE(2);
+			}
+		}
 	}
 }

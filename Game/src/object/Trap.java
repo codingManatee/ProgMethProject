@@ -4,11 +4,11 @@ import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import logic.Player;
 
-public class Trap extends SuperObject {
+public class Trap extends SuperObject implements Killable{
 	
 	public Trap(String name) {
 		this.name = "Trap";
-		this.solidArea = new Rectangle(0,0,64,64);
+		this.solidArea = new Rectangle(0,0,66,66);
 		
 		switch(name) {
 		case "TrapUp":
@@ -71,8 +71,12 @@ public class Trap extends SuperObject {
 	}
 	@Override
 	public void interact(Player player) {
+		kill(player);	
+	}
+	@Override
+	public void kill(Player player) {
 		// TODO Auto-generated method stub
-		player.Dead();	
+		player.Dead();
 	}
 	
 }

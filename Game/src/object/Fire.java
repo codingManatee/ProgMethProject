@@ -3,7 +3,7 @@ package object;
 import javafx.scene.image.Image;
 import logic.Player;
 
-public class Fire extends SuperObject{
+public class Fire extends SuperObject implements Killable{
 	public Fire() {
 		this.name = "Fire";
 		try {
@@ -15,6 +15,12 @@ public class Fire extends SuperObject{
 
 	@Override
 	public void interact(Player player) {
+		// TODO Auto-generated method stub
+		kill(player);
+	}
+
+	@Override
+	public void kill(Player player) {
 		// TODO Auto-generated method stub
 		player.Dead();
 	}

@@ -13,7 +13,8 @@ public abstract class Entity{
 	public boolean collisionOnLeft,collisionOnRight,collisionOnTop,collisionOnBottom;
 	
 	protected Entity(){
-
+		this.visible = true;
+		this.destroyed = false;
 	}
 	
 }

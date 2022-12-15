@@ -61,7 +61,7 @@ public class GamePanel extends Canvas{
 	public void setUpGame() {
 		
 		aSetter.setObject();
-		playMusic(0);
+		//playMusic(0);
 	}
 
 	
@@ -91,8 +91,10 @@ public class GamePanel extends Canvas{
 	public void paintComponent() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.WHITE);
-		// TILE
-		if (player.dead == false) {			
+		if (player.gameState == 0) {			
+			// GAME RUNNING
+			
+			// TILE
 			tileM.draw(gc);
 			
 			// OBJECT
@@ -106,7 +108,8 @@ public class GamePanel extends Canvas{
 			gc.setFont(font);
 			gc.fillText(Integer.toString(player.curScore),screenWidth - 40 ,50);
 			player.draw(gc);
-		} else {
+		} else if (player.gameState == 1){
+			// LOSE
 			gc.setFill(Color.BLACK);
 			gc.fillRect(0, 0, screenWidth, screenHeight);
 			
@@ -114,25 +117,28 @@ public class GamePanel extends Canvas{
 			Font font = new Font(100);
 			gc.setFont(font);
 			gc.fillText("GAME OVER",screenWidth/3-25,screenHeight/2);
+			
+			
+		} else {
+			// WIN
+			gc.setFill(Color.BLACK);
+			gc.fillRect(0, 0, screenWidth, screenHeight);
+			
+			gc.setFill(Color.WHITE);
+			Font font = new Font(100);
+			gc.setFont(font);
+			gc.fillText("GAME WIN",screenWidth/3-25,screenHeight/2);
+			
 		}
 	}
 	
 	
-	// SOUND PLAYER
-	public void playMusic(int i) {
-		sound.setFile(i);
-		sound.play();
-		sound.loop();
-	}
-	public void stopMusic() {
-		if (sound.isPlaying()) sound.stop();
-	}
-	public void playSE(int i) {
-		sound.setFile(i);
-		sound.play();
-	}
-	
-	
+//	// SOUND PLAYER
+//	public void playSE(int i) {
+//		sound.setFile(i);
+//		sound.play();
+//	}
+
 	// Getter and Setter
 	public int getTileSize() {
 		return this.tileSize;

@@ -25,7 +25,7 @@ public class Main extends Application{
         stage.setTitle("Adventure Time!");
         
         
-        HomePage homepage=new HomePage();
+        HomePage homepage = new HomePage();
         root.getChildren().add(homepage);
         
         stage.show();

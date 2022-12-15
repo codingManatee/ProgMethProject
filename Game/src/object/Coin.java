@@ -3,7 +3,7 @@ package object;
 import javafx.scene.image.Image;
 import logic.Player;
 
-public class Coin extends SuperObject{
+public class Coin extends SuperObject implements Pickable{
 	public Coin() {
 		this.name = "Coin";
 		try {
@@ -15,7 +15,16 @@ public class Coin extends SuperObject{
 	
 	@Override
 	public void interact(Player player) {
+		if (isVisible()) {
+			this.image = null;
+			this.playSE(1);
+		}
+		setVisible(false);
+	}
+
+	@Override
+	public void pick(Player player) {
 		// TODO Auto-generated method stub
-		this.equals(null);
+		player.curScore++;
 	}
 }

@@ -9,22 +9,26 @@ import logic.Player;
 import logic.Sound;
 import main.GamePanel;
 
-public class SuperObject implements Interactable{
+public abstract class SuperObject{
 	public Image image;
 	public String name;
 	public boolean collision = false;
 	public int worldX,worldY;
 	long startTime = System.nanoTime();
 	
-	Sound sound = new Sound();
+	// FOR SOUNDEFFECT
+	Sound soundE;
 
 	// SET OBJECT RANGE
 	public Rectangle solidArea = new Rectangle(0,0,64,64);
 	public int solidAreaDefaultX = 0;
 	public int solidAreaDefaultY = 0;
-
+	
+	// PICK UP STATUS
+	public boolean visible = true;
+	
 	public SuperObject() {
-		
+		soundE = new Sound();
 	}
 	
 	public void draw(GraphicsContext gc, GamePanel gp) {
@@ -40,10 +44,19 @@ public class SuperObject implements Interactable{
 			gc.drawImage(image, screenX, screenY , gp.getTileSize() , gp.getTileSize() );
 		}
 	}
-
-	@Override
-	public void interact(Player player) {
-		
+	
+	public void playSE(int i) {
+		soundE.setFile(i);
+		soundE.play();
 	}
+	
+	public abstract void interact(Player player);
 
+	// GETTER AND SETTER
+	public boolean isVisible() {
+		return this.visible;
+	}
+	public void setVisible(boolean bool) {
+		this.visible = bool;
+	}
 }

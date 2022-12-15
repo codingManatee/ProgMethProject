@@ -4,9 +4,8 @@ import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import logic.Player;
 
-public class Bit extends SuperObject{
+public class Bit extends SuperObject implements Pickable{
 	public Bit() {
-		
 		this.name = "Bit";
 		try {
 			image = new Image(ClassLoader.getSystemResource("objects/bit.gif").toString());
@@ -17,6 +16,16 @@ public class Bit extends SuperObject{
 
 	@Override
 	public void interact(Player player) {
+		if (isVisible()) {
+			this.image = null;
+			pick(player);
+		}
+		setVisible(false);
+	}
+
+	@Override
+	public void pick(Player player) {
 		// TODO Auto-generated method stub
+		player.curScore++;		
 	}
 }

@@ -1,5 +1,6 @@
 package component;
 
+import java.awt.KeyEventPostProcessor;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,9 +17,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
@@ -32,9 +38,6 @@ import main.Main;
 import sharedObject.RenderableHolder;
 
 public class HomePage extends StackPane {
-	private Button newgameButton;
-	private String newgameURL;
-
 	private Button tutorialButton;
 	private String tutorialURL;
 
@@ -56,49 +59,45 @@ public class HomePage extends StackPane {
 	public HomePage() {
 		this.setMinSize(1344, 832);
 		this.setMaxSize(1344, 832);
-		this.setPadding(new Insets(10));
+		this.setPadding(new Insets(30));
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 
 		initializeSoundButton();
 		this.setAlignment(soundButton, Pos.TOP_LEFT);
 
-		VBox allButton = new VBox();
-		initializeNewGameButton();
 		initializeTutorialButton();
+		this.setAlignment(tutorialButton, Pos.BOTTOM_LEFT);
+
 		initializeQuitButton();
+		this.setAlignment(quitButton, Pos.BOTTOM_RIGHT);
 
-		allButton.setSpacing(50);
-		allButton.setAlignment(Pos.CENTER);
-		allButton.getChildren().addAll(newgameButton, tutorialButton, quitButton);
+		String getoutURL = ClassLoader.getSystemResource("test/getout.gif").toString();
+		ImageView gamename = new ImageView(new Image(getoutURL));
 
-		this.getChildren().addAll(allButton, soundButton);
-	}
+		VBox v = new VBox();
+		StackPane s = new StackPane();
 
-	public void initializeNewGameButton() {
-		newgameButton = new Button();
-		newgameButton.setMinSize(300, 55);
-		newgameButton.setMaxSize(300, 55);
+		gamename.setFitHeight(340);
+		gamename.setFitWidth(1020);
+		v.setAlignment(Pos.CENTER);
 
-		newgameURL = ClassLoader.getSystemResource("test/newgame.png").toString();
-		ImageView newgame = new ImageView(new Image(newgameURL));
-		newgameButton.setGraphic(newgame);
+		v.getChildren().addAll(s, gamename);
 
-		String startsoundURL = ClassLoader.getSystemResource("test/startsound.mp3").toString();
-		AudioClip startsound = new AudioClip(startsoundURL);
+		this.getChildren().addAll(soundButton, v, tutorialButton, quitButton);
 
-		newgameButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				sound.stop();
-				startsound.play();
+		this.setOnKeyPressed((KeyEvent event) -> {
+			String startsoundURL = ClassLoader.getSystemResource("test/startsound.mp3").toString();
+			AudioClip startsound = new AudioClip(startsoundURL);
+			if (event.getCode() == KeyCode.F) {
 				newgameButtonHandler();
 			}
 		});
 	}
 
+
 	public void newgameButtonHandler() {
 		GamePanel gamePanel = new GamePanel();
-        GameLogic logic = new GameLogic(gamePanel);
+		GameLogic logic = new GameLogic(gamePanel);
 		this.setVisible(true);
 		this.getChildren().clear();
 		this.getChildren().add(gamePanel);
@@ -108,7 +107,6 @@ public class HomePage extends StackPane {
 			public void handle(long now) {
 				gamePanel.paintComponent();
 				logic.logicUpdate();
-				//RenderableHolder.getInstance().update();
 				InputUtility.updateInputState();
 			}
 		};
@@ -199,8 +197,9 @@ public class HomePage extends StackPane {
 
 		soundURL = ClassLoader.getSystemResource("test/titlesong.wav").toString();
 		sound = new AudioClip(soundURL);
-		sound.setVolume(0.2);
+		sound.setVolume(0.05);
 		sound.play();
+
 
 		soundButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
