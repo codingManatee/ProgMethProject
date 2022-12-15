@@ -61,7 +61,6 @@ public class GamePanel extends Canvas{
 	public void setUpGame() {
 		
 		aSetter.setObject();
-		//playMusic(0);
 	}
 
 	
@@ -106,18 +105,18 @@ public class GamePanel extends Canvas{
 			gc.setFill(Color.WHITE);
 			Font font = new Font(40);
 			gc.setFont(font);
-			gc.fillText(Integer.toString(player.curScore),screenWidth - 40 ,50);
+			gc.fillText(Integer.toString(player.curScore),25,50);
 			player.draw(gc);
+			
 		} else if (player.gameState == 1){
 			// LOSE
 			gc.setFill(Color.BLACK);
 			gc.fillRect(0, 0, screenWidth, screenHeight);
 			
 			gc.setFill(Color.WHITE);
-			Font font = new Font(100);
+			Font font = Font.font(100);
 			gc.setFont(font);
 			gc.fillText("GAME OVER",screenWidth/3-25,screenHeight/2);
-			
 			
 		} else {
 			// WIN
@@ -125,7 +124,7 @@ public class GamePanel extends Canvas{
 			gc.fillRect(0, 0, screenWidth, screenHeight);
 			
 			gc.setFill(Color.WHITE);
-			Font font = new Font(100);
+			Font font = Font.font(100);
 			gc.setFont(font);
 			gc.fillText("GAME WIN",screenWidth/3-25,screenHeight/2);
 			
@@ -133,12 +132,6 @@ public class GamePanel extends Canvas{
 	}
 	
 	
-//	// SOUND PLAYER
-//	public void playSE(int i) {
-//		sound.setFile(i);
-//		sound.play();
-//	}
-
 	// Getter and Setter
 	public int getTileSize() {
 		return this.tileSize;

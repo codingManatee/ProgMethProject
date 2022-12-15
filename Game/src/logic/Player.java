@@ -41,6 +41,7 @@ public class Player extends Entity{
 		this.direction = "down";	
 		this.faceDirection = "right";
 		this.speed = 3;
+		setSpawn(13,85);
 		setDefaultValues();
 		screenX = gp.getScreenWidth()/2 - gp.getTileSize()/2;
 		screenY = gp.getScreenHeight()/2 - gp.getTileSize()/2;
@@ -59,12 +60,18 @@ public class Player extends Entity{
 		pickRangeDefaultY = (int) pickRange.getY();
 	}
 	
+	// SET PLAYER'S ORIGIN
+	public void setSpawn(int x,int y) {
+		worldX = gp.getTileSize() * x;
+		worldY = gp.getTileSize() * y;
+	}
+	
 	public void setDefaultValues() {
-		
-		// SET PLAYER'S ORIGIN
-		worldX = gp.getTileSize() * 13;
-		worldY = gp.getTileSize() * 85;
-		
+		collisionOnLeft = false;
+		collisionOnRight = false;
+		collisionOnTop = false;
+		collisionOnBottom = false;
+		speed = 3;
 	}
 
 	public void update() {
@@ -75,37 +82,23 @@ public class Player extends Entity{
 			else if (InputUtility.getKeyPressed(KeyCode.S)) { direction = "down"; }
 			else if (InputUtility.getKeyPressed(KeyCode.A)) { direction = "left"; faceDirection = "left"; }
 			else if (InputUtility.getKeyPressed(KeyCode.D)) { direction = "right"; faceDirection = "right"; }
-			
-			// IF COLLISION IS FALSE, PLAYER CAN MOVE
-			move(direction);
-			
+	
 			// CHECK TILE COLLISION
-			collisionOnLeft = false;
-			collisionOnRight = false;
-			collisionOnTop = false;
-			collisionOnBottom = false;
-			speed = 3;
+			setDefaultValues();
 		}
-		
-		// IF FLYING, ADD SPEED
+		// FLYING SPEED
 		isFlying();
-		
+
 		// CHECK OBJECT COLLISION
 		gp.getCollisionChecker().checkTile(this);
 		int objIndex = gp.getCollisionChecker().checkObject(this, true);
 		pickUpObject(objIndex);
 		
-		// ANIMATE THE PLAYER
+		// IF COLLISION IS FALSE, PLAYER CAN MOVE
+		move(direction);
+		
+		// ANIMATION OF PLAYER
 		animate();
-	}
-	
-	public void move(String direction) {
-		switch(direction) {
-		case "up": if (!collisionOnTop) this.worldY -= speed; break;
-		case "down": if (!collisionOnBottom) this.worldY += speed; break;
-		case "left": if (!collisionOnLeft) this.worldX -= speed; break;
-		case "right": if (!collisionOnRight) this.worldX += speed; break;
-		}		
 	}
 	
 	public void isFlying() {
@@ -113,9 +106,16 @@ public class Player extends Entity{
 			speed += 0.1;
 		}
 	}
+	public void move(String direction) {
+		switch(direction) {
+		case "up": if (!collisionOnTop) this.worldY -= speed; break;
+		case "down": if (!collisionOnBottom) this.worldY += speed; break;
+		case "left": if (!collisionOnLeft) this.worldX -= speed; break;
+		case "right": if (!collisionOnRight) this.worldX += speed; break;
+		}
+	}
 	
-	public void animate(){
-		// ANIMATION OF PLAYER
+	public void animate() {
 		spriteCounter++;
 		if (spriteCounter > 12) {
 			if (spriteNum == 1) {
@@ -133,14 +133,13 @@ public class Player extends Entity{
 		}
 	}
 	
-	// OBJECT CHECKER
+	// INTERACTION WITH OBJECT
 	public void pickUpObject(int i) {
 		if (i != 999) {
 			gp.getSuperObject()[i].interact(this);
 		}
 	}
 
-	
 	public void draw(GraphicsContext gc) {
 		Image image = null;
 		switch(faceDirection) {
@@ -168,7 +167,8 @@ public class Player extends Entity{
 				image = RenderableHolder.getInstance().right4;
 			} else if (spriteNum == 5) {
 				image = RenderableHolder.getInstance().right5;
-			}		
+			}
+			
 		}
 		gc.drawImage(image, screenX, screenY);
 	}
